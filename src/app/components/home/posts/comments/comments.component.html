@@ -1,24 +1,31 @@
-<div *ngFor="let comment of comments" class="comment my-3 p-3 border-bottom">
-  <div class="d-flex align-items-center">
-    <img
-      src="path-to-your-profile-picture.jpg"
-      class="rounded-circle me-3"
-      style="width: 40px; height: 40px"
-    />
-    <span class="fw-bold">{{ comment.user }}</span>
-    <span class="text-white timestamp">{{ comment.timestamp }}</span>
+<div class="comments-container">
+  <div class="d-flex align-items-center p-2" style="background-color: #f8f9fa; ">
+    <i class="fa-solid fa-arrow-left custom-icon me-2" routerLink="" ></i>
   </div>
-  <div class="mt-2">{{ comment.comment }}</div>
-</div>
+  <div class="comment-list">
+    <div *ngFor="let comment of comments" class="comment my-3 border-bottom">
+      <div class="d-flex align-items-center">
+        <img
+          src="path-to-your-profile-picture.jpg"
+          class="rounded-circle me-3"
+          style="width: 40px; height: 40px"
+        />
+        <span class="fw-bold">{{ comment.user }}</span>
+        <span class="text-white timestamp">{{ comment.timestamp }}</span>
+      </div>
+      <div class="mt-1">{{ comment.comment }}</div>
+      <div class=" float-end" >{{comment.createdAt | date: 'short'}}</div>
+    </div>
+  </div>
 
-<!-- Input field at the bottom for adding a new comment -->
-<form class="d-flex align-items-center mt-3" (ngSubmit)="addComment()">
-  <input
-    type="text"
-    class="form-control me-2"
-    placeholder="Add a comment..."
-    [(ngModel)]="newComment"
-    name="comment"
-  />
-  <button type="submit" class="btn btn-primary">Post</button>
-</form>
+  <form class="d-flex align-items-center mt-3 comment-form" (ngSubmit)="addComment()">
+    <input
+      type="text"
+      class="form-control me-2"
+      placeholder="Add a comment..."
+      [(ngModel)]="newComment"
+      name="comment"
+    />
+    <button type="submit" class="btn btn-primary">Post</button>
+  </form>
+</div>

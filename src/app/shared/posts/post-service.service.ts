@@ -27,4 +27,14 @@ export class PostServiceService {
   getComments(recipeID:string):Observable<any>{
     return this.http.get(`${this.contextRoute}api/v1/posts/post/getComments/${recipeID}`)
   }
+  getLikedUsers(recipeID:string):Observable<any>{
+    return this.http.get(`${this.contextRoute}api/v1/posts/postlikes/${recipeID}`)
+  }
+  postComment(newComment: any):Observable<any>{
+    return this.http.post(`${this.contextRoute}api/v1/posts/post/comment`, newComment)
+  }
+
+  createPost(postData: any): Observable<any>{
+    return this.http.post(`${this.contextRoute}api/v1/posts/post`, postData)
+  }
 }

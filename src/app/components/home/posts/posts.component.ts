@@ -18,30 +18,41 @@ export class PostsComponent implements OnInit {
   postService = inject(PostServiceService);
   router = inject(Router)
   ngOnInit(): void {
+      this.fetchposts()
+  }
+
+  fetchposts(){
     this.postService.getPosts().subscribe((res) => {
-      console.log(res);
+      console.log(res.data);
       this.posts = res.data;
       this.postService.getUserSavedPosts(this.user._id).subscribe((res) => {
         this.savedPosts = res.data;//[{},{}]
         this.initializeSavedStatus()
+        this.initializeLikedStatus()
       });
-      this.initializeLikedStatus();
-      
     });
   }
-  openComments(postId:any){
+
+  openComments(postId:string){
     this.router.navigate(['/comments',postId])
   }
+
+  openLikes(postId: string){
+    this.router.navigate(['/likes', postId])
+  }
+
   initializeSavedStatus() {
     this.posts.forEach((post:any) => {
       this.saved[post._id] = this.savedPosts.some((savedPost:any) => savedPost.recipeId === post._id);
     });
   }
+
   initializeLikedStatus() {
     this.posts.forEach((post: any) => {
       this.liked[post._id] = post.likedByIds.includes(this.user._id); // Assuming `liked` is a property from the backend indicating if the user liked the post.
     });
   }
+
   postLiked(postId: string): void {
     this.postService.updateLike(this.user._id, postId).subscribe((res) => {
       this.liked[postId] = res.status;
@@ -58,6 +69,7 @@ export class PostsComponent implements OnInit {
       }
     });
   }
+
   postSaved(postId: string): void {
     this.postService.updateSaved(this.user._id, postId).subscribe((res) => {
       this.saved[postId] = res.statusBool;
@@ -67,7 +79,7 @@ export class PostsComponent implements OnInit {
       if (post) {
         const savedObj = { userId: this.user._id, recipeId: postId };
         const index = this.savedPosts.findIndex((savedPost:any) => savedPost.recipeId === postId && savedPost.userId === this.user._id);
-        
+
         if (index !== -1) {
           // Remove the saved object from the array
           this.savedPosts.splice(index, 1);
@@ -77,5 +89,16 @@ export class PostsComponent implements OnInit {
         }
       }
     });
+  }
+
+  isPortrait(imageUrl: string): boolean {
+    // Logic to determine if the image is portrait or landscape
+    // For example, you can use the image dimensions to decide
+    return true; // Placeholder logic; replace with actual implementation
+  }
+  isLandscape(imageUrl: string): boolean {
+    // Example logic to determine if the image is landscape
+    // Replace with your actual logic based on image dimensions or aspect ratio
+    return true; // Replace with actual condition
   }
 }

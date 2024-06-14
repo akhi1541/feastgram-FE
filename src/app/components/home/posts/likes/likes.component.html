@@ -1,1 +1,25 @@
-<p>likes works!</p>
+<div class="container">
+  <div class="d-flex align-items-center p-2" style="background-color: #f8f9fa; ">
+    <i class="fa-solid fa-arrow-left custom-icon me-2" routerLink="" ></i>
+  </div>
+
+
+  <div *ngIf="likes.length > 0; else noLikes">
+    <ul class="list-group mt-3">
+      <li *ngFor="let like of likes" class="list-group-item d-flex align-items-center mb-3">
+        <img
+          src="path-to-user-profile-picture.jpg"
+          alt="{{ like.userLikedBy.name }}"
+          class="rounded-circle me-3"
+          style="width: 40px; height: 40px"
+        />
+        <div>
+          <span class="fw-bold">{{ getDisplayName(like) }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noLikes>
+    <p>No likes yet.</p>
+  </ng-template>
+</div>

@@ -1,15 +1,30 @@
-/* comment.component.css */
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh; /* Make this container take the full viewport height */
+}
+
+.comment-list {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
 .comment {
-  border-bottom: 1px solid #e9ecef;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
   color: #e9ecef;
 }
 
 .d-flex.align-items-center {
   padding: 10px 0;
 }
-.timestamp{
-    margin-left: 10px;
+
+.timestamp {
+  margin-left: 10px;
 }
+
 .form-control {
   flex: 1;
   border-radius: 20px;
@@ -23,7 +38,10 @@
   border-color: #007bff;
 }
 
-/* Ensure there's enough space at the bottom of the comments section */
-.comment-list {
-  margin-bottom: 80px; /* Adjust based on the height of the input form */
+.comment-form {
+  padding: 10px 0;
+}
+
+.custom-icon {
+  font-size: 1.5rem;
 }

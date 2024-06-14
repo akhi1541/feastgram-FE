@@ -1,0 +1,29 @@
+/* comment.component.css */
+.comment {
+  border-bottom: 1px solid #e9ecef;
+  color: #e9ecef;
+}
+
+.d-flex.align-items-center {
+  padding: 10px 0;
+}
+.timestamp{
+    margin-left: 10px;
+}
+.form-control {
+  flex: 1;
+  border-radius: 20px;
+  background-color: #1c1c1e;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Ensure there's enough space at the bottom of the comments section */
+.comment-list {
+  margin-bottom: 80px; /* Adjust based on the height of the input form */
+}

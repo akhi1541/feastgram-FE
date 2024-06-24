@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostServiceService } from 'src/app/shared/posts/post-service.service';
@@ -10,6 +11,7 @@ import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 export class CommentsComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute)
   postService = inject(PostServiceService)
+  location = inject(Location)
   user = { _id: '662937b597d2fb16591d88b0', name: 'akhil' };
   comments: any = [];
   postId=''
@@ -21,7 +23,6 @@ export class CommentsComponent implements OnInit {
       })
       this.postService.getComments(this.postId).subscribe(res=>{
         this.comments = res.data
-        console.log(this.comments);
       })
 
   }
@@ -38,8 +39,11 @@ export class CommentsComponent implements OnInit {
       const currentTime = new Date()
       this.comments.push({comment: newComment.comment,user: this.user.name, createdAt: currentTime});
       this.newComment = '';
-      console.log(this.comments);
 
     }
+  }
+
+  goback(){
+    this.location.back()
   }
 }

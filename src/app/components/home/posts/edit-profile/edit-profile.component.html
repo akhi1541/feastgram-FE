@@ -1,0 +1,54 @@
+<div class="edit-profile-container">
+  <div class="header d-flex align-items-center p-2" style="background-color: #f8f9fa;">
+    <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
+    <h3 class="header-text">Edit Profile</h3>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" class="profile-form">
+    <div class="form-group d-flex align-items-center">
+      <div class="profile-picture-container">
+        <img
+          src="{{ profile?.profilePicture || 'assets/default-profile-picture.png' }}"
+          class="profile-pic"
+          style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%;"
+          alt="Profile Picture"
+          (click)="triggerFileInputClick()"
+        />
+
+        <input
+          type="file"
+          id="profilePictureInput"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+          hidden
+        />
+      </div>
+
+      <div class="form-fields d-flex flex-column ms-3">
+        <div class="form-group mb-2">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            [(ngModel)]="profile.name"
+            name="name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            [(ngModel)]="profile.email"
+            name="email"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+</div>

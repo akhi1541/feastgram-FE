@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostServiceService } from 'src/app/shared/posts/post-service.service';
@@ -14,6 +15,7 @@ export class CreatePostComponent {
 
   postService = inject(PostServiceService)
   router = inject(Router)
+  location = inject(Location)
   constructor() {}
 
   onSubmit(): void {
@@ -53,5 +55,9 @@ export class CreatePostComponent {
   resetForm(): void {
     this.recipe = {};
     // this.imageFile = undefined;
+  }
+
+  goback(){
+    this.location.back()
   }
 }

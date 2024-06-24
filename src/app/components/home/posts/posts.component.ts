@@ -12,7 +12,7 @@ export class PostsComponent implements OnInit {
   savedPosts:any = [];
   liked: { [key: string]: boolean } = {};
   saved: { [key: string]: boolean } = {};
-  user = { _id: '662937b597d2fb16591d88b0', name: 'akhil' };
+  user = { _id: '662937b597d2fb16591d88b0', name: 'akhil', profilePicture: 'https://akhi-data-dump.s3.ap-south-1.amazonaws.com/1718899953028_men.jpeg' };
 
   constructor() {}
   postService = inject(PostServiceService);
@@ -21,9 +21,10 @@ export class PostsComponent implements OnInit {
       this.fetchposts()
   }
 
+
+
   fetchposts(){
     this.postService.getPosts().subscribe((res) => {
-      console.log(res.data);
       this.posts = res.data;
       this.postService.getUserSavedPosts(this.user._id).subscribe((res) => {
         this.savedPosts = res.data;//[{},{}]
@@ -49,7 +50,7 @@ export class PostsComponent implements OnInit {
 
   initializeLikedStatus() {
     this.posts.forEach((post: any) => {
-      this.liked[post._id] = post.likedByIds.includes(this.user._id); // Assuming `liked` is a property from the backend indicating if the user liked the post.
+      this.liked[post._id] = post.likedByIds.includes(this.user._id);
     });
   }
 
@@ -57,7 +58,6 @@ export class PostsComponent implements OnInit {
     this.postService.updateLike(this.user._id, postId).subscribe((res) => {
       this.liked[postId] = res.status;
       const post = this.posts.find((p: any) => p._id === postId);
-      console.log(post);
 
       if (post) {
         if (post.likedByIds.includes(this.user._id)) {
@@ -74,7 +74,6 @@ export class PostsComponent implements OnInit {
     this.postService.updateSaved(this.user._id, postId).subscribe((res) => {
       this.saved[postId] = res.statusBool;
       const post = this.posts.find((p: any) => p._id === postId);
-      console.log(post);
 
       if (post) {
         const savedObj = { userId: this.user._id, recipeId: postId };
@@ -92,9 +91,7 @@ export class PostsComponent implements OnInit {
   }
 
   isPortrait(imageUrl: string): boolean {
-    // Logic to determine if the image is portrait or landscape
-    // For example, you can use the image dimensions to decide
-    return true; // Placeholder logic; replace with actual implementation
+    return true;
   }
   isLandscape(imageUrl: string): boolean {
     // Example logic to determine if the image is landscape

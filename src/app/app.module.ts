@@ -12,6 +12,9 @@ import { LikesComponent } from './components/home/posts/likes/likes.component';
 import { CommentsComponent } from './components/home/posts/comments/comments.component';
 import { FooterComponent } from './components/home/footer/footer.component';
 import { CreatePostComponent } from './components/home/posts/create-post/create-post.component';
+import { UserProfileComponent } from './components/home/posts/user-profile/user-profile.component';
+import { SinglePostComponent } from './components/home/posts/single-post/single-post.component';
+import { EditProfileComponent } from './components/home/posts/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { CreatePostComponent } from './components/home/posts/create-post/create-
     LikesComponent,
     CommentsComponent,
     FooterComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    UserProfileComponent,
+    SinglePostComponent,
+    EditProfileComponent
 
   ],
   imports: [

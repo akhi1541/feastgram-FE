@@ -1,6 +1,5 @@
 <div class="wrapper">
   <div class="container">
-    <!-- Your existing content -->
     <div class="header"></div>
 
     <div class="content">
@@ -10,13 +9,14 @@
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center user-info post-header">
                 <img
-                  src="{{ post.image }}"
-                  class="rounded-circle me-2"
+                  src="{{ user.profilePicture }}"
+                  class="rounded-circle me-1"
                   alt="Profile picture (smaller)"
+                  style="width: 60px;"
                 />
                 <div class="username">{{ post.name }}</div>
               </div>
-              <i class="fa fa-ellipsis-v options" aria-hidden="true"></i>
+              <i class="fa fa-ellipsis-v options" aria-hidden="true" ></i>
             </div>
             <div
               class="image-container"

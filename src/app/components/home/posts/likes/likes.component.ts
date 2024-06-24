@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostServiceService } from 'src/app/shared/posts/post-service.service';
@@ -13,6 +14,7 @@ export class LikesComponent implements OnInit{
   postId: string = ''
   postService = inject(PostServiceService)
   activatedRoute = inject(ActivatedRoute)
+  location = inject(Location)
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(parms=>{
@@ -20,12 +22,15 @@ export class LikesComponent implements OnInit{
     })
     this.postService.getLikedUsers(this.postId).subscribe(res => {
       this.likes = res.data
-      console.log(res.data);
     })
   }
 
   getDisplayName(like: any): string {
     return like.userLikedBy.name === this.user.name ? 'You' : like.userLikedBy.name;
+  }
+
+  goback(){
+    this.location.back()
   }
 
 }

@@ -7,15 +7,21 @@ import { CreatePostComponent } from './components/home/posts/create-post/create-
 import { UserProfileComponent } from './components/home/posts/user-profile/user-profile.component';
 import { SinglePostComponent } from './components/home/posts/single-post/single-post.component';
 import { EditProfileComponent } from './components/home/posts/edit-profile/edit-profile.component';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { SignupComponent } from './components/authentication/signup/signup.component';
 
 const routes: Routes = [
-  { path: '', component: PostsComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: PostsComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'comments/:id', component: CommentsComponent },
   { path: 'likes/:id', component: LikesComponent },
   { path: 'createpost', component: CreatePostComponent },
   { path: 'user', component: UserProfileComponent },
   { path: 'post/:id', component: SinglePostComponent },
   { path: 'edit-profile', component: EditProfileComponent },
+
 ];
 
 @NgModule({

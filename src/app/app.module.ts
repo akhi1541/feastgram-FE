@@ -10,6 +10,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Bootstrap JS
 import { FormsModule } from '@angular/forms';
 import { LikesComponent } from './components/home/posts/likes/likes.component';
 import { CommentsComponent } from './components/home/posts/comments/comments.component';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { SignupComponent } from './components/authentication/signup/signup.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { CommentsComponent } from './components/home/posts/comments/comments.com
     PostsComponent,
     LikesComponent,
     CommentsComponent,
+    LoginComponent,
+    SignupComponent,
     
   ],
   imports: [

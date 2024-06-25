@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+      <div class="card input-area p-4">
+        <div class="text-center mb-3">
+          <h1 class="pacifico-regular">Feastgram</h1>
+        </div>
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group mb-3">
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              [(ngModel)]="email"
+              name="email"
+              placeholder="Phone number, username or email address"
+              required
+            />
+          </div>
+          <div class="form-group mb-3">
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Log in
+          </button>
+        </form>
+        <div class="text-center my-3">
+          <div class="d-flex align-items-center">
+            <hr class="flex-grow-1" />
+            <span class="px-2">OR</span>
+            <hr class="flex-grow-1" />
+          </div>
+        </div>
+        <button class="btn btn-link btn-block text-primary mb-2">
+          <i class="fab fa-google"></i> Log in with Google
+        </button>
+        <a href="#" class="d-block text-center text-primary"
+          >Forgotten your password?</a
+        >
+      </div>
+      <div class="card mt-3 p-3 text-center">
+        <p class="mb-0">
+          Don't have an account?
+          <a href="/signup" class="text-primary">Sign up</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

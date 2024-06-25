@@ -1,0 +1,89 @@
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.rounded-circle {
+  width: 40px;
+  height: 40px;
+}
+.count {
+  margin-left: 5px;
+}
+.options{
+  margin-right: 2%;
+}
+.post-header{
+  height: 50px;
+  margin-left: 5px;
+}
+.username,
+.time-ago {
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.time-ago {
+  color: #8e8e8e;
+}
+
+.post-content p {
+  font-size: 16px;
+}
+
+.post-actions span {
+  font-size: 14px;
+}
+
+
+
+/* =================== */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure full viewport height */
+}
+
+.container {
+  flex: 1; /* Take remaining vertical space */
+  position: relative; /* Ensure the footer stays at the bottom */
+}
+
+.app-footer {
+  position: sticky;
+  bottom: 0;
+  width: 92%;
+  margin-left: 4%;
+  margin-right: 4%;
+  height: 60px;
+  background-color: #f8f9fa;
+  z-index: 1;
+}
+
+
+.image-container {
+  overflow: hidden;
+  position: relative;
+  height: 300px; /* Default height for images */
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container */
+}
+
+.image-container.portrait {
+  height: 300px; /* Set specific height for portrait images */
+}
+
+.image-container.landscape {
+  height: auto; /* Let the image height be determined by its aspect ratio */
+}
+
+.custom-icon {
+  font-size: 1.5rem;
+}
+
+

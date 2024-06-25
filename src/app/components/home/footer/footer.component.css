@@ -1,0 +1,12 @@
+.footer-icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.footer-icons span {
+  font-size: 24px; /* Adjust as needed */
+  cursor: pointer;
+}

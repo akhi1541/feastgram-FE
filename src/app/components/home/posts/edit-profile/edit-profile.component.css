@@ -1,0 +1,23 @@
+.custom-icon {
+  font-size: 1.5rem;
+}
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+label{
+  color: white
+}
+
+.edit-icon{
+  color: white;
+}
+
+
+
+.form-fields {
+  /* ... existing styles ... */
+  flex-direction: column; /* Stack name and email fields vertically */
+}

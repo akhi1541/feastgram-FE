@@ -1,0 +1,40 @@
+<div class="d-flex align-items-center p-2" style="background-color: #f8f9fa;  ">
+  <i class="fa-solid fa-arrow-left custom-icon me-2 " (click)="goback()" ></i>
+</div>
+<div class="profile-page">
+  <div class="profile-section text-center mb-4">
+    <img src="{{ profile.profilePicture }}" style="width:120px" class="profile-pic" alt="Profile Picture" />
+    <h2>{{profile.name}}</h2>
+    <div class="profile-info">
+      <span>{{ posts.length }} posts</span>
+      <!-- <span>{{friends.length}} followers</span> -->
+      <span>100 following</span>
+    </div>
+    <p>
+      Some description about the userSome description about the userSome
+      description about the userSome description about the user
+    </p>
+    <div class="d-flex justify-content-center align-items-center">
+      <button class="btn btn-primary" routerLink="/edit-profile" >Edit Profile</button>
+      <button class="btn btn-primary">Follow</button>
+    </div>
+  </div>
+
+  <!-- Posts Section -->
+  <div class="posts-section">
+    <div class="row">
+      <div class="col-md-6 post-column" *ngFor="let post of posts">
+        <div
+          class="image-container"
+        >
+          <img
+            [routerLink]="'/post/' + post._id"
+            src="{{ post.image }}"
+            class="img-fluid"
+            alt="Post Image"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

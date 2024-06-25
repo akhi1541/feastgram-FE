@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PostServiceService {
-  contextRoute:string = 'http://localhost:3000/'
+  // contextRoute:string = 'http://localhost:3000/'
+  contextRoute:string = 'http://192.168.10.36:3000/'
 
   constructor(private http:HttpClient) { }
 
@@ -26,5 +27,32 @@ export class PostServiceService {
   }
   getComments(recipeID:string):Observable<any>{
     return this.http.get(`${this.contextRoute}api/v1/posts/post/getComments/${recipeID}`)
+  }
+  getLikedUsers(recipeID:string):Observable<any>{
+    return this.http.get(`${this.contextRoute}api/v1/posts/postlikes/${recipeID}`)
+  }
+  postComment(newComment: any):Observable<any>{
+    return this.http.post(`${this.contextRoute}api/v1/posts/post/comment`, newComment)
+  }
+
+  createPost(postData: any): Observable<any>{
+    return this.http.post(`${this.contextRoute}api/v1/posts/post`, postData)
+  }
+
+  getUserSpecificPosts(userId: string):Observable<any>{
+    return this.http.get(`${this.contextRoute}api/v1/posts/userPosts/${userId}`)
+  }
+
+  userSpecificPost(postId: string):Observable<any>{
+    return this.http.get(`${this.contextRoute}api/v1/posts/post/${postId}`)
+  }
+
+  getProfileInfo(userId: string): Observable<any>{
+    return this.http.get(`${this.contextRoute}api/v1/users/getInfo/${userId}`)
+  }
+
+  updateProfileInfo(userId: string,formdata: FormData){
+    console.log(formdata)
+    return this.http.patch(`${this.contextRoute}api/v1/users/profile/${userId}`, formdata)
   }
 }

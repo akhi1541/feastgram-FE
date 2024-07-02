@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PostServiceService {
   // contextRoute:string = 'http://localhost:3000/'
-  contextRoute:string = 'http://192.168.10.48:3000/'
+  contextRoute:string = 'http://192.168.0.107:3000/'
 
   constructor(private http:HttpClient) { }
 

@@ -14,14 +14,14 @@
           alt="Profile Picture"
           (click)="triggerFileInputClick()"
         />
-
-        <input
+        <app-img-cropper (image)="onFileSelected($event)"></app-img-cropper>
+        <!-- <input
           type="file"
           id="profilePictureInput"
           accept="image/*"
           (change)="onFileSelected($event)"
           hidden
-        />
+        /> -->
       </div>
 
       <div class="form-fields d-flex flex-column ms-3">

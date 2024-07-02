@@ -10,7 +10,7 @@ import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 })
 export class CreatePostComponent {
   recipe: any = {};
-  imageFile!: File;
+  imageFile: any;
 
 
   postService = inject(PostServiceService)
@@ -50,10 +50,9 @@ export class CreatePostComponent {
   }
 
   onFileSelected(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement.files && inputElement.files.length > 0) {
-      this.imageFile = inputElement.files[0];
-    }
+    
+      this.imageFile = event
+    
   }
 
   resetForm(): void {

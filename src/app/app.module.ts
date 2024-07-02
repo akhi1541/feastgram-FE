@@ -24,6 +24,8 @@ import { LoadingInterceptor } from './loading.interceptor';
 import { LoadingServiceService } from './shared/partials/loading-service.service';
 import { NotFoundComponent } from './components/partials/not-found/not-found.component';
 import { SettingsComponent } from './components/partials/settings/settings.component';
+import { ImgCropperComponent } from './components/partials/img-cropper/img-cropper.component';
+import { ImageCropperComponent } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { SettingsComponent } from './components/partials/settings/settings.compo
     LoadingSpinnerComponent,
     NotFoundComponent,
     SettingsComponent,
+    ImgCropperComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { SettingsComponent } from './components/partials/settings/settings.compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ScrollingModule
+    ScrollingModule,
+    ImageCropperComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},

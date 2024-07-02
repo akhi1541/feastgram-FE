@@ -35,17 +35,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   onFileSelected(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement.files && inputElement.files.length > 0) {
-      this.imageFile = inputElement.files[0];
-
-      // Preview the selected image (if supported by browser)
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.profile.profilePicture = e.target.result;
-      };
-      reader.readAsDataURL(this.imageFile);
-    }
+    this.profile.profilePicture = event;
   }
 
   onSubmit() {

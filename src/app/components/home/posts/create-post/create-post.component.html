@@ -21,7 +21,8 @@
     </div>
     <div class="mb-3">
       <label for="image" class="form-label">Image Upload</label>
-      <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)">
+      <app-img-cropper (image)="onFileSelected($event)"></app-img-cropper>
+      <!-- <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)"> -->
     </div>
 
     <div class="mb-3">

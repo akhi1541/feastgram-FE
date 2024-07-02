@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   private http = inject(HttpClient)
-  contextRoute:string = 'http://localhost:3000/'
+  private router = inject(Router)
+  contextRoute:string = 'http://192.168.0.107:3000/'
   constructor() { }
 
   signup(reqObj:any):Observable<any>{
@@ -15,5 +17,13 @@ export class AuthService {
   }
   login(reqObj:any):Observable<any>{
     return this.http.post(`${this.contextRoute}api/v1/users/login`,reqObj)
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token')
+    if(!token){
+      this.router.navigate(['/login'])
+    }
+    return !!token
   }
 }

@@ -97,6 +97,10 @@ export class SinglePostComponent implements OnInit {
     return true; // Replace with actual logic
   }
 
+  openProfile(id: string){
+    this.router.navigate(['user', id])
+  }
+
 
   goback(){
     this.location.back()

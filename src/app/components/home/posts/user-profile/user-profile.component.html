@@ -1,40 +1,83 @@
-<div class="d-flex align-items-center p-2" style="background-color: #f8f9fa;  ">
-  <i class="fa-solid fa-arrow-left custom-icon me-2 " (click)="goback()" ></i>
+<div *ngIf="isLoading" >
+  <app-loading-spinner></app-loading-spinner>
 </div>
-<div class="profile-page">
-  <div class="profile-section text-center mb-4">
-    <img src="{{ profile.profilePicture }}" style="width:120px" class="profile-pic" alt="Profile Picture" />
-    <h2>{{profile.name}}</h2>
-    <div class="profile-info">
-      <span>{{ posts.length }} posts</span>
-      <!-- <span>{{friends.length}} followers</span> -->
-      <span>100 following</span>
-    </div>
-    <p>
-      Some description about the userSome description about the userSome
-      description about the userSome description about the user
-    </p>
-    <div class="d-flex justify-content-center align-items-center">
-      <button class="btn btn-primary" routerLink="/edit-profile" >Edit Profile</button>
-      <button class="btn btn-primary">Follow</button>
-    </div>
-  </div>
 
-  <!-- Posts Section -->
-  <div class="posts-section">
-    <div class="row">
-      <div class="col-md-6 post-column" *ngFor="let post of posts">
-        <div
-          class="image-container"
+<div *ngIf="!isLoading">
+  <div  class="d-flex align-items-center p-2" style="background-color: #f8f9fa">
+    <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
+  </div>
+  <div class="profile-page">
+    <div class="profile-section text-center mb-4">
+      <img
+        src="{{ profilePic }}"
+        style="width: 120px"
+        class="profile-pic"
+        alt="Profile Picture"
+      />
+      <h2>{{ profile.name }}</h2>
+      <div class="profile-info">
+        <span>{{ posts.length }} posts</span>
+        <span>100 following</span>
+      </div>
+      <p>
+        Some description about the userSome description about the userSome
+        description about the userSome description about the user
+      </p>
+      <div class="d-flex justify-content-center align-items-center">
+        <button class="btn btn-primary" *ngIf="showEdit" routerLink="/settings" >Settings</button>
+        <button
+          *ngIf="showEdit"
+          class="btn btn-primary"
+          routerLink="/edit-profile"
         >
-          <img
-            [routerLink]="'/post/' + post._id"
-            src="{{ post.image }}"
-            class="img-fluid"
-            alt="Post Image"
-          />
+          Edit Profile
+        </button>
+        <button class="btn btn-primary">Follow</button>
+      </div>
+      <div *ngIf="showEdit"  class="profile-info d-flex justify-content-evenly align-items-center" >
+        <i (click)="fetchUserPosts(uid)" class="fas fa-file-image mx-2"></i>
+        <hr class="white" >
+        <i (click)="fetchSaved(uid)" class="fas fa-bookmark mx-2"></i>
+      </div>
+    </div>
+
+    <!-- Posts Section -->
+    <div *ngIf="!saved" class="posts-section">
+      <div *ngIf="posts?.length === 0" class="white">
+        <h4>Not posted anything yet</h4>
+      </div>
+      <div *ngIf="posts.length > 0" class="row">
+        <div class="col-md-6 post-column" *ngFor="let post of posts">
+          <a [routerLink]="'/post/' + post._id" class="post-link">
+            <div class="image-container">
+              <img
+                src="{{ post.image }}"
+                class="img-fluid post-image"
+                alt="Post Image"
+              />
+            </div>
+            <div class="post-info">
+              <h3>{{ post.title }}</h3>  <p>{{ post.shortDescription }}</p>  </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="saved" class="posts-section">
+      <div class="row">
+        <div class="col-md-6 post-column" *ngFor="let post of posts">
+          <div class="image-container">
+            <img
+              [routerLink]="'/post/' + post.recipeId._id"
+              src="{{ post.recipeId.image }}"
+              class="img-fluid"
+              alt="Post Image"
+            />
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>

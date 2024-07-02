@@ -9,18 +9,23 @@ import { SinglePostComponent } from './components/home/posts/single-post/single-
 import { EditProfileComponent } from './components/home/posts/edit-profile/edit-profile.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { SignupComponent } from './components/authentication/signup/signup.component';
+import { NotFoundComponent } from './components/partials/not-found/not-found.component';
+import { AuthGuard } from './shared/authGuards/authguard.service';
+import { SettingsComponent } from './components/partials/settings/settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: PostsComponent },
+  { path: 'home', component: PostsComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
-  { path: 'comments/:id', component: CommentsComponent },
-  { path: 'likes/:id', component: LikesComponent },
-  { path: 'createpost', component: CreatePostComponent },
-  { path: 'user', component: UserProfileComponent },
-  { path: 'post/:id', component: SinglePostComponent },
-  { path: 'edit-profile', component: EditProfileComponent },
+  { path: 'comments/:id', component: CommentsComponent, canActivate: [AuthGuard] },
+  { path: 'likes/:id', component: LikesComponent, canActivate: [AuthGuard] },
+  { path: 'createpost', component: CreatePostComponent, canActivate: [AuthGuard] },
+  { path: 'user/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'post/:id', component: SinglePostComponent,canActivate: [AuthGuard] },
+  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: '**', component: NotFoundComponent }
 
 ];
 

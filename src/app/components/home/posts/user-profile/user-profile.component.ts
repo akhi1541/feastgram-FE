@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingServiceService } from 'src/app/shared/partials/loading-service.service';
 import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 
 @Component({
@@ -9,22 +10,79 @@ import { PostServiceService } from 'src/app/shared/posts/post-service.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit{
-  postsService = inject(PostServiceService)
-  location = inject(Location)
+
   posts: any[] = []
   profile : any
 
+  name: string =  ''
+  uid: string = ''
+  profilePic: string = ''
+
+  someone: string = ''
+  showEdit: boolean = false
+
+  isLoading: boolean = false;
+  saved = false
+
+  constructor(){}
+  postsService = inject(PostServiceService)
+  location = inject(Location)
+  actRoute = inject(ActivatedRoute)
+  loadingService = inject(LoadingServiceService)
+
+
+
   ngOnInit(): void {
-    this.fetchUserPosts()
-    this.postsService.getProfileInfo(this.user._id).subscribe((res: any) => {
+
+    this.uid = localStorage.getItem('uid') || ''
+    this.actRoute.params.subscribe(params => {
+      this.someone =params['id']
+    })
+
+    if(this.someone === this.uid){
+      this.profilePic = localStorage.getItem('profilePicture') || ''
+      this.name = localStorage.getItem('name') || ''
+
+
+      this.showEdit = true
+      this.fetchUserPosts(this.uid)
+      this.getProfileInfo(this.uid)
+    }else{
+      this.fetchUserPosts(this.someone)
+      this.getProfileInfo(this.someone)
+    }
+
+    this.loadingService.isLoading.subscribe(loading => {
+      this.isLoading = loading;
+    });
+  }
+
+  getProfileInfo(userId: string){
+    this.loadingService.showLoading()
+    this.postsService.getProfileInfo(this.someone).subscribe((res: any) => {
       this.profile = res.data
+      this.profilePic = res.data.profilePicture
+      this.loadingService.hideLoading()
     })
   }
-  user = { _id: '662937b597d2fb16591d88b0', name: 'akhil', profilePicture: 'https://akhi-data-dump.s3.ap-south-1.amazonaws.com/1718899953028_men.jpeg' };
 
-  fetchUserPosts(){
-    this.postsService.getUserSpecificPosts(this.user._id).subscribe((res)=>{
+  fetchUserPosts(userId: string){
+    this.saved = false
+    this.loadingService.showLoading
+    this.postsService.getUserSpecificPosts(userId).subscribe((res)=>{
       this.posts = res.data
+      this.loadingService.hideLoading()
+    })
+  }
+
+  fetchSaved(userId: string){
+    this.saved = true
+    this.loadingService.showLoading
+    this.postsService.getUserSavedPosts(userId).subscribe((res)=>{
+      this.posts = res.data
+      console.log(res.data);
+
+      this.loadingService.hideLoading()
     })
   }
 

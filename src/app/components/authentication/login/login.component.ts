@@ -21,6 +21,10 @@ export class LoginComponent {
     const reqObj = { email: this.email, password: this.password };
     this.authService.login(reqObj).subscribe(res=>{
       console.log(res)
+      localStorage.setItem('name', res.data.name)
+      localStorage.setItem('uid', res.data._id)
+      localStorage.setItem('profilePicture', res.data.profilePicture)
+      localStorage.setItem('token', res.token)
       this.router.navigate(['/home'])
 
     });

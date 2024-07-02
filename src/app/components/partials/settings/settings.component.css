@@ -1,0 +1,53 @@
+.settings-content {
+  padding: 20px; /* Adjust padding as needed */
+}
+h2{
+  color: white;
+  padding: 10px;
+}
+/* Assuming you're using Font Awesome for icons */
+.custom-icon {
+  font-size: 1.5rem; /* Adjust icon size */
+  color: #333; /* Adjust icon color */
+}
+
+.settings-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.setting-item {
+  margin-bottom: 10px;
+}
+
+.setting-item a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 10px; /* Adjust padding as needed */
+  /* Consider using a hover effect for visual feedback */
+  /* border-bottom: 1px solid #ddd;  */  /* Optional: uncomment for borders */
+}
+
+.feedback-form {
+  margin-top: 20px; /* Adjust spacing as needed */
+}
+
+.feedback-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+span, label{
+  color: white;
+}

@@ -7,6 +7,7 @@ import { PostServiceService } from 'src/app/shared/posts/post-service.service';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent{
+  userId : string = localStorage.getItem('uid') || ''
 
   @Output() fetchPostsClicked = new EventEmitter<void>();
 

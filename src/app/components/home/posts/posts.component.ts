@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 
@@ -12,27 +12,51 @@ export class PostsComponent implements OnInit {
   savedPosts:any = [];
   liked: { [key: string]: boolean } = {};
   saved: { [key: string]: boolean } = {};
-  user = { _id: '662937b597d2fb16591d88b0', name: 'akhil', profilePicture: 'https://akhi-data-dump.s3.ap-south-1.amazonaws.com/1718899953028_men.jpeg' };
+  name: string =  ''
+  uid: string = ''
+  profilePic: string = ''
+  currentPage: number = 1;
+  totalPages: number = 1;
 
   constructor() {}
   postService = inject(PostServiceService);
   router = inject(Router)
   ngOnInit(): void {
-      this.fetchposts()
+    this.name = localStorage.getItem('name') || ''
+    this.uid = localStorage.getItem('uid') || ''
+    this.profilePic = localStorage.getItem('profilePicture') || ''
+      this.fetchPosts()
   }
 
+  // ------------------------------
 
-
-  fetchposts(){
-    this.postService.getPosts().subscribe((res) => {
-      this.posts = res.data;
-      this.postService.getUserSavedPosts(this.user._id).subscribe((res) => {
-        this.savedPosts = res.data;//[{},{}]
-        this.initializeSavedStatus()
-        this.initializeLikedStatus()
-      });
+  fetchPosts(page: number = 1) {
+    this.postService.getPosts(page).subscribe((res) => {
+      const newPosts = res.data.filter((post:any) => !this.posts.some((existingPost: any) => existingPost._id === post._id));
+      this.posts = [...this.posts, ...newPosts];
+      this.totalPages = Math.ceil(res.total / res.limit);
+      console.log(newPosts);
+      if (page === 1) { // Only fetch saved posts once
+        this.postService.getUserSavedPosts(this.uid).subscribe((res) => {
+          this.savedPosts = res.data;
+          this.initializeSavedStatus();
+          this.initializeLikedStatus();
+        });
+      }
     });
   }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    const max = document.documentElement.scrollHeight;
+
+    if(pos >= max - 1 && this.currentPage < this.totalPages) { // Ensure not to fetch beyond total pages
+      this.currentPage++;
+      this.fetchPosts(this.currentPage);
+    }
+  }
+  // ------------------------------
 
   openComments(postId:string){
     this.router.navigate(['/comments',postId])
@@ -44,26 +68,26 @@ export class PostsComponent implements OnInit {
 
   initializeSavedStatus() {
     this.posts.forEach((post:any) => {
-      this.saved[post._id] = this.savedPosts.some((savedPost:any) => savedPost.recipeId === post._id);
+      this.saved[post._id] = this.savedPosts.some((savedPost:any) => savedPost.recipeId._id === post._id);
     });
   }
 
   initializeLikedStatus() {
     this.posts.forEach((post: any) => {
-      this.liked[post._id] = post.likedByIds.includes(this.user._id);
+      this.liked[post._id] = post.likedByIds.includes(this.uid);
     });
   }
 
   postLiked(postId: string): void {
-    this.postService.updateLike(this.user._id, postId).subscribe((res) => {
+    this.postService.updateLike(this.uid, postId).subscribe((res) => {
       this.liked[postId] = res.status;
       const post = this.posts.find((p: any) => p._id === postId);
 
       if (post) {
-        if (post.likedByIds.includes(this.user._id)) {
+        if (post.likedByIds.includes(this.uid)) {
           post.likedByIds.pop();
         } else {
-          post.likedByIds.push(this.user._id);
+          post.likedByIds.push(this.uid);
         }
         post.likesCount = post.likedByIds.length;
       }
@@ -71,13 +95,13 @@ export class PostsComponent implements OnInit {
   }
 
   postSaved(postId: string): void {
-    this.postService.updateSaved(this.user._id, postId).subscribe((res) => {
+    this.postService.updateSaved(this.uid, postId).subscribe((res) => {
       this.saved[postId] = res.statusBool;
       const post = this.posts.find((p: any) => p._id === postId);
 
       if (post) {
-        const savedObj = { userId: this.user._id, recipeId: postId };
-        const index = this.savedPosts.findIndex((savedPost:any) => savedPost.recipeId === postId && savedPost.userId === this.user._id);
+        const savedObj = { userId: this.uid, recipeId: postId };
+        const index = this.savedPosts.findIndex((savedPost:any) => savedPost.recipeId === postId && savedPost.userId === this.uid);
 
         if (index !== -1) {
           // Remove the saved object from the array
@@ -97,5 +121,9 @@ export class PostsComponent implements OnInit {
     // Example logic to determine if the image is landscape
     // Replace with your actual logic based on image dimensions or aspect ratio
     return true; // Replace with actual condition
+  }
+
+  openProfile(chefId: string){
+    this.router.navigate(['/user',chefId])
   }
 }

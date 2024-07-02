@@ -32,6 +32,10 @@ export class SignupComponent {
     };
     this.authService.signup(reqObj).subscribe((res: any) => {
       console.log(res);
+      localStorage.setItem('name', res.data.name)
+      localStorage.setItem('uid', res.data._id)
+      localStorage.setItem('profilePicture', res.data.profilePicture)
+      localStorage.setItem('token', res.data.token)
       this.router.navigate(['/home']);
     });
   }

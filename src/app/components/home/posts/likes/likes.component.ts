@@ -10,7 +10,7 @@ import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 })
 export class LikesComponent implements OnInit{
   likes:any = []
-  user = { _id: '662937b597d2fb16591d88b0', name: 'akhil' };
+  user = { _id: localStorage.getItem('uid'), name: localStorage.getItem('name') };
   postId: string = ''
   postService = inject(PostServiceService)
   activatedRoute = inject(ActivatedRoute)
@@ -22,6 +22,8 @@ export class LikesComponent implements OnInit{
     })
     this.postService.getLikedUsers(this.postId).subscribe(res => {
       this.likes = res.data
+      console.log(res.data);
+
     })
   }
 

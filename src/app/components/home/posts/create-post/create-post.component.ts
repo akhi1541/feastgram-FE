@@ -9,7 +9,7 @@ import { PostServiceService } from 'src/app/shared/posts/post-service.service';
   styleUrls: ['./create-post.component.css'],
 })
 export class CreatePostComponent {
-  recipe: any = {chefId : "662937b597d2fb16591d88b0"};
+  recipe: any = {};
   imageFile!: File;
 
 
@@ -23,10 +23,14 @@ export class CreatePostComponent {
       const ingredientsArray = this.recipe.ingredients.split(',').map((item: string) => item.trim());
 
       this.recipe.ingredients = ingredientsArray;
+      const chefId = localStorage.getItem('uid');
 
       const formData = new FormData();
 
       // Append recipe object to formData as JSON string
+      if(chefId){
+        formData.append('chefId', chefId)
+      }
       formData.append('title', JSON.stringify(this.recipe));
 
       // Append image file
@@ -41,7 +45,7 @@ export class CreatePostComponent {
         console.log(res);
 
       })
-      this.router.navigate([""])
+      this.router.navigate(["/home"])
     }
   }
 

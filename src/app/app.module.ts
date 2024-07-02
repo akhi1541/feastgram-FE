@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostsComponent } from './components/home/posts/posts.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Bootstrap JS
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +19,11 @@ import { SinglePostComponent } from './components/home/posts/single-post/single-
 import { EditProfileComponent } from './components/home/posts/edit-profile/edit-profile.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { SignupComponent } from './components/authentication/signup/signup.component';
+import { LoadingSpinnerComponent } from './components/partials/loading-spinner/loading-spinner.component';
+import { LoadingInterceptor } from './loading.interceptor';
+import { LoadingServiceService } from './shared/partials/loading-service.service';
+import { NotFoundComponent } from './components/partials/not-found/not-found.component';
+import { SettingsComponent } from './components/partials/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +38,9 @@ import { SignupComponent } from './components/authentication/signup/signup.compo
     UserProfileComponent,
     SinglePostComponent,
     EditProfileComponent,
+    LoadingSpinnerComponent,
+    NotFoundComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,8 +48,12 @@ import { SignupComponent } from './components/authentication/signup/signup.compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ScrollingModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+    LoadingServiceService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

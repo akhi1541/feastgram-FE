@@ -7,13 +7,21 @@ import { Observable } from 'rxjs';
 })
 export class PostServiceService {
   // contextRoute:string = 'http://localhost:3000/'
-  contextRoute:string = 'http://192.168.10.36:3000/'
+  contextRoute:string = 'http://192.168.10.48:3000/'
 
   constructor(private http:HttpClient) { }
 
-  getPosts():Observable<any>{
-    return this.http.get(`${this.contextRoute}api/v1/posts/allposts`)
+  // getPosts():Observable<any>{
+  //   return this.http.get(`${this.contextRoute}api/v1/posts/allposts`)
+  // }
+
+  getPosts(page: number): Observable<any> {
+    return this.http.get(`${this.contextRoute}api/v1/posts/allposts?page=${page}`);
   }
+
+
+
+
   updateLike(userId:string,recipeId:string):Observable<any>{
     const reqObj={'recipeId':recipeId,'userId':userId}
     return this.http.post(`${this.contextRoute}api/v1/posts/post/like`,reqObj)
@@ -22,8 +30,8 @@ export class PostServiceService {
     const reqObj = {'userId':userId,'recipeId':recipeId}
     return this.http.post(`${this.contextRoute}api/v1/posts/savedPost`,reqObj)
   }
-  getUserSavedPosts(uesrId:string):Observable<any>{
-    return this.http.get(`${this.contextRoute}api/v1/posts/savedPosts/userSavedPosts/${uesrId}`)
+  getUserSavedPosts(userId:string):Observable<any>{
+    return this.http.get(`${this.contextRoute}api/v1/posts/savedPosts/userSavedPosts/${userId}`)
   }
   getComments(recipeID:string):Observable<any>{
     return this.http.get(`${this.contextRoute}api/v1/posts/post/getComments/${recipeID}`)

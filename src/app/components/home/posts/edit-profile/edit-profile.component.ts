@@ -10,10 +10,12 @@ import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 export class EditProfileComponent implements OnInit {
   location = inject(Location);
   postService = inject(PostServiceService);
-  user = { _id: '662937b597d2fb16591d88b0', name: 'akhil' };
+  user = { _id: '', name: '' };
   profile!: any;
   imageFile!: File;
   ngOnInit(): void {
+    this.user._id = localStorage.getItem('uid') || ''
+    this.user.name = localStorage.getItem('name') || ''
     this.postService.getProfileInfo(this.user._id).subscribe((res: any) => {
       this.profile = res.data;
     });
@@ -48,6 +50,11 @@ export class EditProfileComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
+    const chefId = this.user._id
+    if(chefId){
+      formData.append('chefId', chefId)
+    }
+    formData.append('type', 'profilePic')
     formData.append('name', this.profile.name);
     formData.append('email', this.profile.email);
     if (this.imageFile) {

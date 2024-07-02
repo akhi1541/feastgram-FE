@@ -7,20 +7,26 @@
         <div class="col-md-4 g-4">
           <div class="card">
             <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center user-info post-header">
+              <div
+                (click)="openProfile(post.chefId)"
+                class="d-flex align-items-center user-info post-header"
+              >
                 <img
-                  src="{{ user.profilePicture }}"
-                  class="rounded-circle me-1"
+                  src="{{ post.profilePicture }}"
+                  class="rounded-circle me-1 profile-picture"
                   alt="Profile picture (smaller)"
-                  style="width: 60px;"
                 />
+
                 <div class="username">{{ post.name }}</div>
               </div>
-              <i class="fa fa-ellipsis-v options" aria-hidden="true" ></i>
+              <i class="fa fa-ellipsis-v options" aria-hidden="true"></i>
             </div>
             <div
               class="image-container"
-              [ngClass]="{ 'portrait': isPortrait(post.image), 'landscape': isLandscape(post.image) }"
+              [ngClass]="{
+                portrait: isPortrait(post.image),
+                landscape: isLandscape(post.image)
+              }"
             >
               <img
                 src="{{ post.image }}"
@@ -130,6 +136,6 @@
   </div>
   <app-footer
     class="app-footer"
-    (fetchPostsClicked)="fetchposts()"
+    (fetchPostsClicked)="fetchPosts()"
   ></app-footer>
 </div>

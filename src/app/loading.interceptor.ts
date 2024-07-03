@@ -8,20 +8,42 @@ import {
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { LoadingServiceService } from './shared/partials/loading-service.service';
+import { AuthService } from './shared/authentication/auth.service';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
   private pendingRequests = 0;
 
-  constructor(private loadingService: LoadingServiceService) {}
+  constructor(private loadingService: LoadingServiceService , private authService: AuthService) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.pendingRequests++;
     if(this.pendingRequests === 1){
       this.loadingService.showLoading()
     }
 
-    return next.handle(request).pipe(
+    const currentUserToken = localStorage.getItem('token');
+    const modifiedRequest = request.clone({
+      setHeaders:{ jwt:`Bearer ${currentUserToken}` } //updating the req by making a clone of it and then adding headers 
+    })
+
+    //*we then  pass the request to the next interceptor in the chain or ultimately sending it to the server.
+    if(!currentUserToken){
+      return next.handle(request).pipe(
+        tap({
+          next: (event) =>{
+            if(event.type === HttpEventType.Response){
+              this.handleHideLoading();
+            }
+          },
+          error: () => {
+            console.log(`Request completed. Pending requests: ${this.pendingRequests}`);
+            this.handleHideLoading();
+          }
+        })
+      )
+    }
+    return next.handle(modifiedRequest).pipe(
       tap({
         next: (event) =>{
           if(event.type === HttpEventType.Response){

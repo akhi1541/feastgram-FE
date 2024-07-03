@@ -35,7 +35,7 @@ export class SignupComponent {
       localStorage.setItem('name', res.data.name)
       localStorage.setItem('uid', res.data._id)
       localStorage.setItem('profilePicture', res.data.profilePicture)
-      localStorage.setItem('token', res.data.token)
+      localStorage.setItem('token', res.token)
       this.router.navigate(['/home']);
     });
   }

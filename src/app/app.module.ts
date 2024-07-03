@@ -26,6 +26,7 @@ import { NotFoundComponent } from './components/partials/not-found/not-found.com
 import { SettingsComponent } from './components/partials/settings/settings.component';
 import { ImgCropperComponent } from './components/partials/img-cropper/img-cropper.component';
 import { ImageCropperComponent } from 'ngx-image-cropper';
+import { LogoutComponent } from './components/authentication/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ImageCropperComponent } from 'ngx-image-cropper';
     NotFoundComponent,
     SettingsComponent,
     ImgCropperComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

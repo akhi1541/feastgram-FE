@@ -12,10 +12,13 @@ import { SignupComponent } from './components/authentication/signup/signup.compo
 import { NotFoundComponent } from './components/partials/not-found/not-found.component';
 import { AuthGuard } from './shared/authGuards/authguard.service';
 import { SettingsComponent } from './components/partials/settings/settings.component';
+import { LogoutComponent } from './components/authentication/logout/logout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component:LogoutComponent },
+
   { path: 'home', component: PostsComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'comments/:id', component: CommentsComponent, canActivate: [AuthGuard] },

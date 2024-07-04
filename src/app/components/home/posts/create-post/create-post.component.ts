@@ -52,11 +52,11 @@ export class CreatePostComponent {
   }
 
   onFileSelected(event: any): void {
-    
       this.imageFile = event.blob;
       this.fileName = event.fileName
-    
   }
+
+
 
   resetForm(): void {
     this.recipe = {};

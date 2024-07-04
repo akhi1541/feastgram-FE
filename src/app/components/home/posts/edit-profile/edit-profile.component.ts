@@ -12,7 +12,9 @@ export class EditProfileComponent implements OnInit {
   postService = inject(PostServiceService);
   user = { _id: '', name: '' };
   profile!: any;
+  fileName: any;
   imageFile!: File;
+
   ngOnInit(): void {
     this.user._id = localStorage.getItem('uid') || ''
     this.user.name = localStorage.getItem('name') || ''
@@ -36,6 +38,7 @@ export class EditProfileComponent implements OnInit {
 
   onFileSelected(event: any): void {
     this.profile.profilePicture = event.blob;
+    this.fileName = event.fileName
 
   }
 
@@ -48,10 +51,12 @@ export class EditProfileComponent implements OnInit {
     formData.append('type', 'profilePic')
     formData.append('name', this.profile.name);
     formData.append('email', this.profile.email);
+    formData.append('bio',this.profile.bio)
     // formData.append('fileName',)
-    if (this.imageFile) {
+
       formData.append('image', this.profile.profilePicture);
-    }
+      formData.append('fileName',this.fileName)
+
     formData.forEach((value, key) => {
     });
 

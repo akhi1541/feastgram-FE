@@ -1,15 +1,16 @@
-import { ImageCroppedEvent ,ImageCropperComponent} from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-img-cropper',
   templateUrl: './img-cropper.component.html',
-  styleUrls: ['./img-cropper.component.css']
+  styleUrls: ['./img-cropper.component.css'],
 })
 export class ImgCropperComponent {
   imageChangedEvent: any = '';
   croppedImage: any = '';
+  previewImage:any=''
   type: string = 'text';
   rotation: number = 0;
   @Output() image: EventEmitter<any> = new EventEmitter();
@@ -19,8 +20,10 @@ export class ImgCropperComponent {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.objectUrl;
+    this.previewImage = event.objectUrl
+    this.croppedImage = {fileName:this.imageChangedEvent.srcElement.files[0].name,blob:event.blob}
   }
+  
 
   imageLoaded() {
     // show cropper
@@ -44,4 +47,3 @@ export class ImgCropperComponent {
     if (this.rotation === 4) this.rotation = 0;
   }
 }
-

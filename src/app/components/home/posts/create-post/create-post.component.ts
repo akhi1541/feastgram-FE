@@ -11,6 +11,7 @@ import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 export class CreatePostComponent {
   recipe: any = {};
   imageFile: any;
+  fileName:any;
 
 
   postService = inject(PostServiceService)
@@ -35,6 +36,7 @@ export class CreatePostComponent {
 
       // Append image file
       formData.append('image', this.imageFile);
+      formData.append('fileName',this.fileName)
 
       // Log FormData for verification
       console.log('FormData before submission:');
@@ -49,9 +51,10 @@ export class CreatePostComponent {
     }
   }
 
-  onFileSelected(event: Event): void {
+  onFileSelected(event: any): void {
     
-      this.imageFile = event
+      this.imageFile = event.blob;
+      this.fileName = event.fileName
     
   }
 

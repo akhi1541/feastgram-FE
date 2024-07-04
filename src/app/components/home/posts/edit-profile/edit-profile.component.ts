@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { formatDate, Location } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 
@@ -34,8 +34,9 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  onFileSelected(event: Event): void {
-    this.profile.profilePicture = event;
+  onFileSelected(event: any): void {
+    this.profile.profilePicture = event.blob;
+
   }
 
   onSubmit() {
@@ -47,8 +48,9 @@ export class EditProfileComponent implements OnInit {
     formData.append('type', 'profilePic')
     formData.append('name', this.profile.name);
     formData.append('email', this.profile.email);
+    // formData.append('fileName',)
     if (this.imageFile) {
-      formData.append('image', this.imageFile);
+      formData.append('image', this.profile.profilePicture);
     }
     formData.forEach((value, key) => {
     });

@@ -1,6 +1,6 @@
 import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-img-cropper',
@@ -13,6 +13,7 @@ export class ImgCropperComponent {
   previewImage:any=''
   type: string = 'text';
   rotation: number = 0;
+  @Input() cropShape:any;
   @Output() image: EventEmitter<any> = new EventEmitter();
 
   fileChangeEvent(event: any): void {

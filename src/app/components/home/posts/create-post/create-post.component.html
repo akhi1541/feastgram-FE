@@ -2,6 +2,12 @@
   <div class="d-flex align-items-center p-2" style="background-color: #f8f9fa;  ">
     <i class="fa-solid fa-arrow-left custom-icon me-2 " routerLink=""(click)="goback()" ></i>
   </div>
+  <div *ngIf="errorcode" class="alert alert-danger" role="alert">
+    <strong>{{statusMessage}}</strong>
+   </div>
+  <div *ngIf="postCreated" class="alert alert-success" role="alert">
+    <strong>{{statusMessage}}</strong>
+   </div>
   <form (ngSubmit)="onSubmit()">
     <div class="mb-3">
       <label for="title" class="form-label">Title *</label>
@@ -20,8 +26,14 @@
       <textarea class="form-control" id="instructions" name="instructions" [(ngModel)]="recipe.instructions"></textarea>
     </div>
     <div class="mb-3">
+      
       <label for="image" class="form-label">Image Upload</label>
-      <app-img-cropper (image)="onFileSelected($event)"></app-img-cropper>
+      <div *ngIf="imgUploaded" class="alert alert-success" role="alert">
+        <strong>{{statusMessage}}</strong>
+       </div>
+      <app-img-cropper [cropShape]="cropShape" (image)="onFileSelected($event)"></app-img-cropper>
+
+      
       <!-- <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)"> -->
     </div>
 

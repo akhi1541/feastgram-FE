@@ -14,6 +14,10 @@ export class EditProfileComponent implements OnInit {
   profile!: any;
   fileName: any;
   imageFile!: File;
+  cropShape:boolean=true
+  statusMessage: string='';
+  imgUploaded: boolean=false
+  profileUpdated:boolean=false
 
   ngOnInit(): void {
     this.user._id = localStorage.getItem('uid') || ''
@@ -39,6 +43,14 @@ export class EditProfileComponent implements OnInit {
   onFileSelected(event: any): void {
     this.profile.profilePicture = event.blob;
     this.fileName = event.fileName
+    this.statusMessage = 'Image uploaded successfully!';
+    this.imgUploaded = true;
+
+
+    setTimeout(() => {
+      this.statusMessage = '';
+    this.imgUploaded = false;
+    }, 1500);
 
   }
 
@@ -61,7 +73,14 @@ export class EditProfileComponent implements OnInit {
     });
 
     this.postService.updateProfileInfo(this.user._id, formData).subscribe((res) => {
+      this.profileUpdated=true
+      this.statusMessage='Profile Updated Successfully!'
       console.log(res);
+      setTimeout(() => {
+        this.statusMessage = '';
+      this.profileUpdated = false;
+      }, 1500);
+
 
     })
   }

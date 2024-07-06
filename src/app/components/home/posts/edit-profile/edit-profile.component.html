@@ -7,6 +7,9 @@
   <form (ngSubmit)="onSubmit()" class="profile-form">
     <div class="form-group d-flex-column align-items-center">
       <div class="profile-picture-container">
+        <div *ngIf="imgUploaded || profileUpdated" class="alert alert-success" role="alert">
+          <strong>{{statusMessage}}</strong>
+         </div>
         <img
           src="{{ profile?.profilePicture || 'assets/default-profile-picture.png' }}"
           class="profile-pic"
@@ -14,7 +17,7 @@
           alt="Profile Picture"
           (click)="triggerFileInputClick()"
         />
-        <app-img-cropper (image)="onFileSelected($event)"></app-img-cropper>
+        <app-img-cropper [cropShape]="cropShape" (image)="onFileSelected($event)"></app-img-cropper>
         <!-- <input
           type="file"
           id="profilePictureInput"

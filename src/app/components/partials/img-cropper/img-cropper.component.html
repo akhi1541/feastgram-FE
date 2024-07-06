@@ -12,7 +12,7 @@
     [resizeToWidth]="300"
     [containWithinAspectRatio]="true"
     [canvasRotation]="rotation"
-    [roundCropper]="true"
+    [roundCropper]="cropShape"
     format="png"
     (imageCropped)="imageCropped($event)"
     (imageLoaded)="imageLoaded()"
@@ -25,8 +25,5 @@
   <img [src]="previewImage" class="img-fluid mb-3" />
   <button type="button" class="btn btn-primary" (click)="uploadImage()">
     Upload
-  </button>
-  <button type="button" class="btn btn-secondary ml-2" (click)="rotateImage()">
-    Rotate
   </button>
 </div>

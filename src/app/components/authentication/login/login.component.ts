@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/shared/authentication/auth.service';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  errMsg:string='';
   private authService = inject(AuthService);
   private router = inject(Router)
   onSubmit() {
@@ -19,14 +20,30 @@ export class LoginComponent {
       password: this.password,
     });
     const reqObj = { email: this.email, password: this.password };
-    this.authService.login(reqObj).subscribe(res=>{
-      console.log(res)
-      localStorage.setItem('name', res.data.name)
-      localStorage.setItem('uid', res.data._id)
-      localStorage.setItem('profilePicture', res.data.profilePicture)
-      localStorage.setItem('token', res.token)
-      this.router.navigate(['/home'])
-
-    });
+    this.authService.login(reqObj).subscribe({
+      next: (res) => {
+        if (res.status === 'fail') {
+          console.log('Error:', res.message);
+          this.errMsg = res.message;
+        } else {
+          console.log(res);
+          localStorage.setItem('name', res.data.name);
+          localStorage.setItem('uid', res.data._id);
+          localStorage.setItem('profilePicture', res.data.profilePicture);
+          localStorage.setItem('token', res.token);
+          this.router.navigate(['/home']);
+        }
+      },
+      error: (err) => {
+        console.log('Error:', err);
+        this.errMsg = err.error.message;
+        setTimeout(() => {
+          this.errMsg=''
+        }, 3000);
+      },
+      complete: () => {
+        console.log('Request complete');
+      }
+    })
   }
 }

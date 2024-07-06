@@ -18,10 +18,20 @@
   border-radius: 50%; */
 }
 
-.profile-info {
+.profile-info  {
   display: flex;
   justify-content: space-around;
   margin: 10px 0;
+  
+}
+.profile-info.switch {
+  border: 1px dotted white;
+  border-radius: 25px;
+  padding: 4px 3px;
+}
+
+.fas{
+  font-size: 22px;
 }
 
 .profile-info span {

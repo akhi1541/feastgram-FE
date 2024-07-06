@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { formatDate, Location } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 
@@ -12,7 +12,13 @@ export class EditProfileComponent implements OnInit {
   postService = inject(PostServiceService);
   user = { _id: '', name: '' };
   profile!: any;
+  fileName: any;
   imageFile!: File;
+  cropShape:boolean=true
+  statusMessage: string='';
+  imgUploaded: boolean=false
+  profileUpdated:boolean=false
+
   ngOnInit(): void {
     this.user._id = localStorage.getItem('uid') || ''
     this.user.name = localStorage.getItem('name') || ''
@@ -34,8 +40,18 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  onFileSelected(event: Event): void {
-    this.profile.profilePicture = event;
+  onFileSelected(event: any): void {
+    this.profile.profilePicture = event.blob;
+    this.fileName = event.fileName
+    this.statusMessage = 'Image uploaded successfully!';
+    this.imgUploaded = true;
+
+
+    setTimeout(() => {
+      this.statusMessage = '';
+    this.imgUploaded = false;
+    }, 1500);
+
   }
 
   onSubmit() {
@@ -47,14 +63,24 @@ export class EditProfileComponent implements OnInit {
     formData.append('type', 'profilePic')
     formData.append('name', this.profile.name);
     formData.append('email', this.profile.email);
-    if (this.imageFile) {
-      formData.append('image', this.imageFile);
-    }
+    formData.append('bio',this.profile.bio)
+    // formData.append('fileName',)
+
+      formData.append('image', this.profile.profilePicture);
+      formData.append('fileName',this.fileName)
+
     formData.forEach((value, key) => {
     });
 
     this.postService.updateProfileInfo(this.user._id, formData).subscribe((res) => {
+      this.profileUpdated=true
+      this.statusMessage='Profile Updated Successfully!'
       console.log(res);
+      setTimeout(() => {
+        this.statusMessage = '';
+      this.profileUpdated = false;
+      }, 1500);
+
 
     })
   }

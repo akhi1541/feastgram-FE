@@ -1,27 +1,29 @@
-
- 
-          <input type="file" (change)="fileChangeEvent($event)" accept="image/*" class="form-control mb-3" />
-          <div *ngIf="imageChangedEvent">
-           
-            <image-cropper
-              [imageChangedEvent]="imageChangedEvent"
-              [aspectRatio]="1"
-              [maintainAspectRatio]="true"
-              [resizeToWidth]="300"
-              [containWithinAspectRatio]="true"
-              [canvasRotation]="rotation"
-              [roundCropper]="true"
-              format="png"
-              (imageCropped)="imageCropped($event)"
-              (imageLoaded)="imageLoaded()"
-              (cropperReady)="cropperReady()"
-              (loadImageFailed)="loadImageFailed()"
-            ></image-cropper>
-          </div>
-          <div *ngIf="croppedImage">
-            <h6 class="mt-3">Cropped Image:</h6>
-            <img [src]="croppedImage" class="img-fluid mb-3" />
-            <button type="button" class="btn btn-primary" (click)="uploadImage()">Upload</button>
-            <button type="button" class="btn btn-secondary ml-2" (click)="rotateImage()">Rotate</button>
-          </div>
-
+<input
+  type="file"
+  (change)="fileChangeEvent($event)"
+  accept="image/*"
+  class="form-control mb-3"
+/>
+<div *ngIf="imageChangedEvent">
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [aspectRatio]="1"
+    [maintainAspectRatio]="true"
+    [resizeToWidth]="300"
+    [containWithinAspectRatio]="true"
+    [canvasRotation]="rotation"
+    [roundCropper]="cropShape"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+  ></image-cropper>
+</div>
+<div *ngIf="croppedImage">
+  <h6 class="mt-3">Cropped Image:</h6>
+  <img [src]="previewImage" class="img-fluid mb-3" />
+  <button type="button" class="btn btn-primary" (click)="uploadImage()">
+    Upload
+  </button>
+</div>

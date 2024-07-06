@@ -5,8 +5,11 @@
   </div>
 
   <form (ngSubmit)="onSubmit()" class="profile-form">
-    <div class="form-group d-flex align-items-center">
+    <div class="form-group d-flex-column align-items-center">
       <div class="profile-picture-container">
+        <div *ngIf="imgUploaded || profileUpdated" class="alert alert-success" role="alert">
+          <strong>{{statusMessage}}</strong>
+         </div>
         <img
           src="{{ profile?.profilePicture || 'assets/default-profile-picture.png' }}"
           class="profile-pic"
@@ -14,7 +17,7 @@
           alt="Profile Picture"
           (click)="triggerFileInputClick()"
         />
-        <app-img-cropper (image)="onFileSelected($event)"></app-img-cropper>
+        <app-img-cropper [cropShape]="cropShape" (image)="onFileSelected($event)"></app-img-cropper>
         <!-- <input
           type="file"
           id="profilePictureInput"
@@ -24,7 +27,7 @@
         /> -->
       </div>
 
-      <div class="form-fields d-flex flex-column ms-3">
+      <div class="form-fields d-flex flex-column">
         <div class="form-group mb-2">
           <label for="name">Name:</label>
           <input
@@ -45,6 +48,17 @@
             [(ngModel)]="profile.email"
             name="email"
             required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Bio:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="bio"
+            [(ngModel)]="profile.bio"
+            name="bio"
+            placeholder="Bio"
           />
         </div>
       </div>

@@ -11,7 +11,7 @@
       <img
         src="{{ profilePic }}"
         style="width: 120px"
-        class="profile-pic"
+        class="rounded-circle me-1 profile-pic"
         alt="Profile Picture"
       />
       <h2>{{ profile.name }}</h2>
@@ -20,8 +20,7 @@
         <span>100 following</span>
       </div>
       <p>
-        Some description about the userSome description about the userSome
-        description about the userSome description about the user
+        {{profile.bio === null || profile.bio === '' ? 'No bio yet' : profile.bio}}
       </p>
       <div class="d-flex justify-content-center align-items-center">
         <button class="btn btn-primary" *ngIf="showEdit" routerLink="/settings" >Settings</button>
@@ -30,12 +29,12 @@
           class="btn btn-primary"
           routerLink="/edit-profile"
         >
-          Edit Profile
+          Edit
         </button>
         <button class="btn btn-primary">Follow</button>
       </div>
-      <div *ngIf="showEdit"  class="profile-info d-flex justify-content-evenly align-items-center" >
-        <i (click)="fetchUserPosts(uid)" class="fas fa-file-image mx-2"></i>
+      <div *ngIf="showEdit"  class="profile-info switch d-flex justify-content-space-between align-items-center" >
+        <i (click)="fetchUserPosts(uid)" class="fas fa-file-image  mx-4"></i>
         <hr class="white" >
         <i (click)="fetchSaved(uid)" class="fas fa-bookmark mx-2"></i>
       </div>

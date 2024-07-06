@@ -17,6 +17,7 @@ export class UserProfileComponent implements OnInit{
   name: string =  ''
   uid: string = ''
   profilePic: string = ''
+  bio: string = ''
 
   someone: string = ''
   showEdit: boolean = false
@@ -42,6 +43,7 @@ export class UserProfileComponent implements OnInit{
     if(this.someone === this.uid){
       this.profilePic = localStorage.getItem('profilePicture') || ''
       this.name = localStorage.getItem('name') || ''
+      this.bio = localStorage.getItem('bio') || ''
 
 
       this.showEdit = true
@@ -61,6 +63,10 @@ export class UserProfileComponent implements OnInit{
     this.loadingService.showLoading()
     this.postsService.getProfileInfo(this.someone).subscribe((res: any) => {
       this.profile = res.data
+      console.log(res.data);
+
+      this.bio = res.data.bio
+
       this.profilePic = res.data.profilePicture
       this.loadingService.hideLoading()
     })

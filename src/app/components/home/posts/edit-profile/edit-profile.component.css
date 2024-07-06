@@ -16,7 +16,6 @@ label{
 }
 
 
-
 .form-fields {
   /* ... existing styles ... */
   flex-direction: column; /* Stack name and email fields vertically */

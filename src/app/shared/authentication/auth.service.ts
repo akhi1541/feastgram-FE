@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private http = inject(HttpClient)
   private router = inject(Router)
-  contextRoute:string = 'http://192.168.0.107:3000/'
+  contextRoute:string = 'http://localhost:3000/'
   constructor() { }
 
   signup(reqObj:any):Observable<any>{

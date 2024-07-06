@@ -5,6 +5,10 @@
         <div class="text-center mb-3">
           <h1 class="pacifico-regular">Feastgram</h1>
         </div>
+        <div *ngIf="errMsg" class="alert alert-danger" role="alert">
+         <strong>An Error occured</strong>
+         <p>{{errMsg}}</p>
+        </div>
         <form (ngSubmit)="onSubmit()">
           <div class="form-group mb-3">
             <input
@@ -13,7 +17,7 @@
               class="form-control"
               [(ngModel)]="email"
               name="email"
-              placeholder="Phone number, username or email address"
+              placeholder="username or email address"
               required
             />
           </div>

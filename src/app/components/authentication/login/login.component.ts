@@ -14,7 +14,6 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router)
   onSubmit() {
-    // Implement your login logic here
     console.log('Login submitted', {
       email: this.email,
       password: this.password,
@@ -31,6 +30,7 @@ export class LoginComponent {
           localStorage.setItem('uid', res.data._id);
           localStorage.setItem('profilePicture', res.data.profilePicture);
           localStorage.setItem('token', res.token);
+          localStorage.setItem('bio', res.data.bio)
           this.router.navigate(['/home']);
         }
       },

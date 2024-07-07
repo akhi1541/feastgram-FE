@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class LikesComponent implements OnInit{
   postId: string = ''
   postService = inject(PostServiceService)
   activatedRoute = inject(ActivatedRoute)
+  router = inject(Router)
   location = inject(Location)
 
   ngOnInit(): void {
@@ -22,9 +23,14 @@ export class LikesComponent implements OnInit{
     })
     this.postService.getLikedUsers(this.postId).subscribe(res => {
       this.likes = res.data
-      console.log(res.data);
+      console.log(res.data[0]);
 
     })
+  }
+
+  openProfile(id:string){
+    this.router.navigate(['user',id])
+
   }
 
   getDisplayName(like: any): string {

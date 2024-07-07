@@ -18,7 +18,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component:LogoutComponent },
-
   { path: 'home', component: PostsComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'comments/:id', component: CommentsComponent, canActivate: [AuthGuard] },

@@ -16,6 +16,7 @@
           style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%;"
           alt="Profile Picture"
           (click)="triggerFileInputClick()"
+          loading="lazy"
         />
         <app-img-cropper [cropShape]="cropShape" (image)="onFileSelected($event)"></app-img-cropper>
         <!-- <input

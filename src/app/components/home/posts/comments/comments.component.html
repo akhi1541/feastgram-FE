@@ -1,24 +1,35 @@
 <div class="comments-container">
-  <div class="d-flex align-items-center p-2" style="background-color: #f8f9fa; ">
-    <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()" ></i>
+  <div
+    class="d-flex align-items-center justify-content-between p-2"
+    style="background-color: #f8f9fa"
+  >
+    <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
+    <div class="flex-grow-1 text-center mb-3">
+      <h1 class="pacifico-regular m-0">Feastgram</h1>
+    </div>
+    <div style="width: 24px"></div>
   </div>
   <div class="comment-list">
     <div *ngFor="let comment of comments" class="comment my-3 border-bottom">
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" (click)="openProfile(comment.userId)">
         <img
-          src="{{comment.profilePicture}}"
+          src="{{ comment.profilePicture }}"
           class="rounded-circle me-3"
           style="width: 40px; height: 40px"
+          loading="lazy"
         />
         <span class="fw-bold">{{ comment.user }}</span>
         <span class="text-white timestamp">{{ comment.timestamp }}</span>
       </div>
       <div class="mt-1">{{ comment.comment }}</div>
-      <div class=" float-end" >{{comment.createdAt | date: 'short'}}</div>
+      <div class="float-end">{{ comment.createdAt | date : "short" }}</div>
     </div>
   </div>
 
-  <form class="d-flex align-items-center mt-3 comment-form" (ngSubmit)="addComment()">
+  <form
+    class="d-flex align-items-center mt-3 comment-form"
+    (ngSubmit)="addComment()"
+  >
     <input
       type="text"
       class="form-control me-2"

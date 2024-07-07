@@ -1,17 +1,25 @@
 <div class="container">
-  <div class="d-flex align-items-center p-2" style="background-color: #f8f9fa; ">
+  <div
+    class="d-flex align-items-center justify-content-between p-2"
+    style="background-color: #f8f9fa"
+  >
     <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
+    <div class="flex-grow-1 text-center mb-3">
+      <h1 class="pacifico-regular m-0">Feastgram</h1>
+    </div>
+    <div style="width: 24px"></div>
   </div>
 
 
   <div *ngIf="likes.length > 0; else noLikes">
     <ul class="list-group mt-3">
-      <li *ngFor="let like of likes" class="list-group-item d-flex align-items-center mb-3">
+      <li *ngFor="let like of likes" (click)="openProfile(like.userLikedBy.userLiked_id)"  class="list-group-item d-flex align-items-center mb-3">
         <img
           src="{{like.userLikedBy.profilePicture}}"
           alt="{{ like.userLikedBy.name }}"
           class="rounded-circle me-3"
           style="width: 40px; height: 40px"
+          loading="lazy"
         />
         <div>
           <span class="fw-bold">{{ getDisplayName(like) }}</span>

@@ -3,8 +3,15 @@
 </div>
 
 <div *ngIf="!isLoading">
-  <div  class="d-flex align-items-center p-2" style="background-color: #f8f9fa">
+  <div
+    class="d-flex align-items-center justify-content-between p-2"
+    style="background-color: #f8f9fa"
+  >
     <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
+    <div class="flex-grow-1 text-center mb-3">
+      <h1 class="pacifico-regular m-0">Feastgram</h1>
+    </div>
+    <div style="width: 24px"></div>
   </div>
   <div class="profile-page">
     <div class="profile-section text-center mb-4">
@@ -13,6 +20,7 @@
         style="width: 120px"
         class="rounded-circle me-1 profile-pic"
         alt="Profile Picture"
+        loading="lazy"
       />
       <h2>{{ profile.name }}</h2>
       <div class="profile-info">

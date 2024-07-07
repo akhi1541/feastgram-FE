@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostServiceService } from 'src/app/shared/posts/post-service.service';
 
 @Component({
@@ -12,6 +12,7 @@ export class CommentsComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute)
   postService = inject(PostServiceService)
   location = inject(Location)
+  router = inject(Router)
   // user = { _id: '662937b597d2fb16591d88b0', name: 'akhil' };
   comments: any = [];
   postId=''
@@ -54,6 +55,11 @@ export class CommentsComponent implements OnInit {
       this.newComment = '';
 
     }
+  }
+
+  openProfile(userId: string){
+    this.router.navigate(['user', userId])
+
   }
 
   goback(){

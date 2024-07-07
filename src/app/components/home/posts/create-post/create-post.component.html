@@ -1,6 +1,13 @@
 <div class="container">
-  <div class="d-flex align-items-center p-2" style="background-color: #f8f9fa;  ">
-    <i class="fa-solid fa-arrow-left custom-icon me-2 " routerLink=""(click)="goback()" ></i>
+  <div
+    class="d-flex align-items-center justify-content-between p-2"
+    style="background-color: #f8f9fa"
+  >
+    <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
+    <div class="flex-grow-1 text-center mb-3">
+      <h1 class="pacifico-regular m-0">Feastgram</h1>
+    </div>
+    <div style="width: 24px"></div>
   </div>
   <div *ngIf="errorcode" class="alert alert-danger" role="alert">
     <strong>{{statusMessage}}</strong>
@@ -26,14 +33,14 @@
       <textarea class="form-control" id="instructions" name="instructions" [(ngModel)]="recipe.instructions"></textarea>
     </div>
     <div class="mb-3">
-      
+
       <label for="image" class="form-label">Image Upload</label>
       <div *ngIf="imgUploaded" class="alert alert-success" role="alert">
         <strong>{{statusMessage}}</strong>
        </div>
       <app-img-cropper [cropShape]="cropShape" (image)="onFileSelected($event)"></app-img-cropper>
 
-      
+
       <!-- <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)"> -->
     </div>
 

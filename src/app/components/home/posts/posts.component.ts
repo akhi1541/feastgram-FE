@@ -11,12 +11,14 @@ export class PostsComponent implements OnInit {
   posts: any = [];
   savedPosts:any = [];
   liked: { [key: string]: boolean } = {};
+  showDesc: { [key: string]: boolean } = {};
   saved: { [key: string]: boolean } = {};
   name: string =  ''
   uid: string = ''
   profilePic: string = ''
   currentPage: number = 1;
   totalPages: number = 1;
+  showContent: boolean = false;
 
   constructor() {}
   postService = inject(PostServiceService);
@@ -60,6 +62,13 @@ export class PostsComponent implements OnInit {
 
   openComments(postId:string){
     this.router.navigate(['/comments',postId])
+  }
+  toggleContent(postId:string) {
+    // this.showContent = !this.showContent;
+    this.showDesc[postId] = !this.showContent;
+  }
+  less(postId:string){
+    this.showDesc[postId] =false
   }
 
   openLikes(postId: string){

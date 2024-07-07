@@ -3,13 +3,12 @@
     <div class="header"></div>
     <div
       class="d-flex align-items-center justify-content-center p-2 position-fixed w-100"
-      style="background-color: #f8f9fa; top: 0; z-index: 1000"
+      style="background-color: #f8f9fa; top: 0; z-index: 1; left: 0"
     >
       <h1 class="pacifico-regular m-0">Feastgram</h1>
     </div>
 
-    <div style="margin-top: 45px">
-    </div>
+    <div style="margin-top: 45px"></div>
 
     <div class="content">
       <div class="row g-3" *ngFor="let post of posts">
@@ -49,6 +48,27 @@
               <p class="card-text">{{ post.description }}</p>
 
               <div class="time-ago">{{ post.createdAt | date : "short" }}</div>
+
+              <h6 *ngIf="!showDesc[post._id]" (click)="toggleContent(post._id)">
+                more..
+              </h6>
+              <ng-container *ngIf="showDesc[post._id]">
+                <div class="content">
+                  <div class="ingediantes">
+                    <h6>Ingredients</h6>
+                    <li *ngFor="let item of post.ingredients">{{ item }}</li>
+                  </div>
+
+                  <div class="instructions">
+                    <h6>Instructions</h6>
+                    <span>{{ post.instructions }}</span>
+                  </div>
+                </div>
+              </ng-container>
+              <h6 *ngIf="showDesc[post._id]" (click)="less(post._id)">
+                less..
+              </h6>
+
               <div
                 class="post-actions d-flex justify-content-between align-items-center"
               >

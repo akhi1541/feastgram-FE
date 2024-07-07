@@ -14,7 +14,9 @@ export class SinglePostComponent implements OnInit {
 
   liked: { [postId: string]: boolean } = {};
   saved: { [postId: string]: boolean } = {};
-  user = { _id: '662937b597d2fb16591d88b0', name: 'akhil' };
+  user :any;
+  showContent: boolean = false;
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -40,7 +42,9 @@ export class SinglePostComponent implements OnInit {
       }
     );
   }
-
+  toggleContent() {
+    this.showContent = !this.showContent;
+  }
   openComments(postId: string): void {
     this.router.navigate(['/comments', postId]);
   }

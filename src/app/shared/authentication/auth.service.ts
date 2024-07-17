@@ -12,18 +12,27 @@ export class AuthService {
   contextRoute:string = 'http://localhost:3000/'
   constructor() { }
 
-  signup(reqObj:any):Observable<any>{
-    return this.http.post(`${this.contextRoute}api/v1/users/signup`,reqObj)
-  }
-  login(reqObj:any):Observable<any>{
-    return this.http.post(`${this.contextRoute}api/v1/users/login`,reqObj)
+  signup(reqObj: any): Observable<any> {
+    return this.http.post(`${this.contextRoute}api/v1/users/signup`, reqObj);
   }
 
+  login(reqObj: any): Observable<any> {
+    return this.http.post(`${this.contextRoute}api/v1/users/login`, reqObj);
+  }
+
+  resetPassword(reqObj: any): Observable<any> {
+    return this.http.post(
+      `${this.contextRoute}api/v1/users/resetPassword`,
+      reqObj
+    );
+  }
+
+ 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('token')
-    if(!token){
-      this.router.navigate(['/login'])
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.router.navigate(['/login']);
     }
-    return !!token
+    return !!token;
   }
 }

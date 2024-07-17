@@ -34,16 +34,16 @@ export class LoginComponent {
           this.router.navigate(['/home']);
         }
       },
-      error: (err) => {
-        console.log('Error:', err);
-        this.errMsg = err.error.message;
-        setTimeout(() => {
-          this.errMsg=''
-        }, 3000);
-      },
-      complete: () => {
-        console.log('Request complete');
-      }
+          error: (err) => {
+            console.log('Error:', err);
+            this.errMsg = err.error.message;
+            setTimeout(() => {
+              this.errMsg=''
+            }, 3000);
+          },
+          complete: () => {
+            console.log('Request complete');
+          }
     })
   }
 }

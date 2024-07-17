@@ -20,10 +20,12 @@
                 class="d-flex align-items-center user-info post-header"
               >
                 <img
-                  src="{{ post.profilePicture }}"
+                  ngSrc="{{ post.profilePicture }}"
                   class="rounded-circle me-1 profile-picture"
                   alt="Profile picture (smaller)"
                   loading="lazy"
+                  width="40"
+                  height="40"
                 />
 
                 <div class="username">{{ post.name }}</div>
@@ -32,15 +34,15 @@
             </div>
             <div
               class="image-container"
-              [ngClass]="{
-                portrait: isPortrait(post.image),
-                landscape: isLandscape(post.image)
-              }"
+              
             >
               <img
-                src="{{ post.image }}"
+                ngSrc="{{ post.image }}"
                 class="card-img-top"
                 alt="Profile picture"
+                loading="lazy"
+                width="600"
+                height="500"
               />
             </div>
 

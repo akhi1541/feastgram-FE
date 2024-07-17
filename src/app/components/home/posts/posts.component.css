@@ -82,13 +82,7 @@
     object-fit: cover; /* Ensures the image covers the container */
   }
 
-  .image-container.portrait {
-    height: 300px; /* Set specific height for portrait images */
-  }
-
-  .image-container.landscape {
-    height: auto; /* Let the image height be determined by its aspect ratio */
-  }
+  
 /* -----=============================================== */
 
 .post-menu {

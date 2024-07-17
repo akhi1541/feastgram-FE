@@ -13,11 +13,13 @@ import { NotFoundComponent } from './components/partials/not-found/not-found.com
 import { AuthGuard } from './shared/authGuards/authguard.service';
 import { SettingsComponent } from './components/partials/settings/settings.component';
 import { LogoutComponent } from './components/authentication/logout/logout.component';
+import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component:LogoutComponent },
+  { path: 'resetPage/:token',component:ResetPasswordComponent },
   { path: 'home', component: PostsComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'comments/:id', component: CommentsComponent, canActivate: [AuthGuard] },

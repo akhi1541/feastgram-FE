@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { PostsComponent } from './components/home/posts/posts.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NgOptimizedImage } from '@angular/common';
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Bootstrap JS
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,6 +28,8 @@ import { SettingsComponent } from './components/partials/settings/settings.compo
 import { ImgCropperComponent } from './components/partials/img-cropper/img-cropper.component';
 import { ImageCropperComponent } from 'ngx-image-cropper';
 import { LogoutComponent } from './components/authentication/logout/logout.component';
+import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
+
 
 @NgModule({
   declarations: [
@@ -46,6 +49,7 @@ import { LogoutComponent } from './components/authentication/logout/logout.compo
     SettingsComponent,
     ImgCropperComponent,
     LogoutComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,8 @@ import { LogoutComponent } from './components/authentication/logout/logout.compo
     FormsModule,
     ReactiveFormsModule,
     ScrollingModule,
-    ImageCropperComponent
+    ImageCropperComponent,
+    NgOptimizedImage
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},

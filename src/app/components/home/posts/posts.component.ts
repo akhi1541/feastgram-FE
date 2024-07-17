@@ -7,12 +7,14 @@ import { PostServiceService } from 'src/app/shared/posts/post-service.service';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css'],
 })
+
 export class PostsComponent implements OnInit {
   posts: any = [];
   savedPosts:any = [];
   liked: { [key: string]: boolean } = {};
   showDesc: { [key: string]: boolean } = {};
   saved: { [key: string]: boolean } = {};
+  imageLoaded: { [key: string]: boolean } = {};
   name: string =  ''
   uid: string = ''
   profilePic: string = ''
@@ -30,15 +32,17 @@ export class PostsComponent implements OnInit {
       this.fetchPosts()
   }
 
+
+
   // ------------------------------
 
   fetchPosts(page: number = 1) {
     this.postService.getPosts(page).subscribe((res) => {
       const newPosts = res.data.filter((post:any) => !this.posts.some((existingPost: any) => existingPost._id === post._id));
       this.posts = [...this.posts, ...newPosts];
-      this.totalPages = Math.ceil(res.total / res.limit);
+      this.totalPages = res.pages
       console.log(newPosts);
-      if (page === 1) { // Only fetch saved posts once
+      if (page === 1) {
         this.postService.getUserSavedPosts(this.uid).subscribe((res) => {
           this.savedPosts = res.data;
           this.initializeSavedStatus();
@@ -88,9 +92,7 @@ export class PostsComponent implements OnInit {
   }
 
   postLiked(postId: string): void {
-    this.postService.updateLike(this.uid, postId).subscribe((res) => {
-      this.liked[postId] = res.status;
-      const post = this.posts.find((p: any) => p._id === postId);
+    const post = this.posts.find((p: any) => p._id === postId);
 
       if (post) {
         if (post.likedByIds.includes(this.uid)) {
@@ -100,6 +102,9 @@ export class PostsComponent implements OnInit {
         }
         post.likesCount = post.likedByIds.length;
       }
+    this.postService.updateLike(this.uid, postId).subscribe((res) => {
+      this.liked[postId] = res.status;
+
     });
   }
 

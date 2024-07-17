@@ -5,6 +5,10 @@
         <div class="text-center mb-3">
           <h1 class="pacifico-regular">Feastgram</h1>
         </div>
+        <div *ngIf="errMsg" class="alert alert-danger" role="alert">
+          <strong>An Error occured</strong>
+          <p>{{errMsg}}</p>
+         </div>
         <h5 class="text-center mb-4">
           Sign up to see photos from your friends.
         </h5>

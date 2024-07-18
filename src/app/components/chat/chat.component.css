@@ -1,0 +1,45 @@
+.chat-box {
+  overflow-y: auto;
+}
+
+.custom-icon {
+  font-size: 1.5rem;
+}
+label {
+  color: white;
+}
+
+p {
+    color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+.text-right {
+    
+  width: 70%;
+  /* display: flex; */
+  flex-wrap: wrap;
+  float: right;
+}
+
+.text-left {
+  width: 70%;
+  flex-wrap: wrap;
+  float: left;
+}
+
+.bg-primary {
+  background-color: #007bff !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+.p-2 {
+  padding: 0.5rem !important;
+}
+
+.rounded {
+  border-radius: 0.25rem !important;
+}

@@ -167,8 +167,8 @@ export class CreatePostComponent {
               }
             },
             'image/jpeg',
-            0.3
-          ); // Adjust quality as needed (0.7 means 70% quality)
+            1.0
+          );
         };
 
         img.onerror = (error) => {

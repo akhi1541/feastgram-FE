@@ -29,7 +29,8 @@ import { ImgCropperComponent } from './components/partials/img-cropper/img-cropp
 import { ImageCropperComponent } from 'ngx-image-cropper';
 import { LogoutComponent } from './components/authentication/logout/logout.component';
 import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
-import { ChatComponent } from './components/chat/chat.component';
+import { ChatComponent } from './components/communication/chat/chat.component';
+import { ChatListComponent } from './components/communication/chat-list/chat-list.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { ChatComponent } from './components/chat/chat.component';
     LogoutComponent,
     ResetPasswordComponent,
     ChatComponent,
+    ChatListComponent,
   ],
   imports: [
     BrowserModule,

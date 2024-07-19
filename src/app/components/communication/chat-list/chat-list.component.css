@@ -1,0 +1,13 @@
+.dropdown-menu {
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item:hover {
+  background-color: #f1f1f1;
+}

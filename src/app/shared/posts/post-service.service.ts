@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -24,11 +24,13 @@ export class PostServiceService {
 
   updateLike(userId:string,recipeId:string):Observable<any>{
     const reqObj={'recipeId':recipeId,'userId':userId}
-    return this.http.post(`${this.contextRoute}api/v1/posts/post/like`,reqObj)
+    const headers = new HttpHeaders({ 'Skip-Loading': 'true' });
+    return this.http.post(`${this.contextRoute}api/v1/posts/post/like`,reqObj, {headers})
   }
   updateSaved(userId:string,recipeId:string):Observable<any>{
     const reqObj = {'userId':userId,'recipeId':recipeId}
-    return this.http.post(`${this.contextRoute}api/v1/posts/savedPost`,reqObj)
+    const headers = new HttpHeaders({ 'Skip-Loading': 'true' });
+    return this.http.post(`${this.contextRoute}api/v1/posts/savedPost`,reqObj, {headers})
   }
   getUserSavedPosts(userId:string):Observable<any>{
     return this.http.get(`${this.contextRoute}api/v1/posts/savedPosts/userSavedPosts/${userId}`)
@@ -62,5 +64,9 @@ export class PostServiceService {
   updateProfileInfo(userId: string,formdata: FormData){
     console.log(formdata)
     return this.http.patch(`${this.contextRoute}api/v1/users/profile/${userId}`, formdata)
+  }
+
+  deletePost(id: string){
+    return this.http.delete(`${this.contextRoute}api/v1/posts/post/${id}`)
   }
 }

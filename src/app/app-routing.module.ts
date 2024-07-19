@@ -14,7 +14,8 @@ import { AuthGuard } from './shared/authGuards/authguard.service';
 import { SettingsComponent } from './components/partials/settings/settings.component';
 import { LogoutComponent } from './components/authentication/logout/logout.component';
 import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
-import { ChatComponent } from './components/chat/chat.component';
+import { ChatComponent } from './components/communication/chat/chat.component';
+import { ChatListComponent } from './components/communication/chat-list/chat-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'resetPage/:token',component:ResetPasswordComponent },
   { path: 'home', component: PostsComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
-  { path: 'chat/:receiverId', component: ChatComponent,canActivate: [AuthGuard] },
+  { path: 'chat/:receiverId/:name', component: ChatComponent,canActivate: [AuthGuard] },
+  { path: 'chatlist', component: ChatListComponent,canActivate: [AuthGuard] },
 
   { path: 'comments/:id', component: CommentsComponent, canActivate: [AuthGuard] },
   { path: 'likes/:id', component: LikesComponent, canActivate: [AuthGuard] },

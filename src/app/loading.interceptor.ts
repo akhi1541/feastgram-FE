@@ -24,7 +24,7 @@ export class LoadingInterceptor implements HttpInterceptor {
 
     const currentUserToken = localStorage.getItem('token');
     const modifiedRequest = request.clone({
-      setHeaders:{ jwt:`Bearer ${currentUserToken}` } //updating the req by making a clone of it and then adding headers 
+      setHeaders:{ jwt:`Bearer ${currentUserToken}` }
     })
 
     //*we then  pass the request to the next interceptor in the chain or ultimately sending it to the server.

@@ -11,6 +11,7 @@ export class SettingsComponent implements OnInit{
   showFeedbackForm = false;
   feedbackEmail = '';
   feedbackText = '';
+  forgotPass: string = 'http://localhost:3000/api/v1/posts/forgetPassword'
 
   private location = inject(Location)
   private router = inject(Router)
@@ -22,9 +23,10 @@ export class SettingsComponent implements OnInit{
     this.feedbackText = '';
   }
 
-  changePassword(){
-    // goes here
-  }
+  // changePassword(){
+
+  //   // goes here
+  // }
 
   goback(){
     this.location.back()

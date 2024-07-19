@@ -15,7 +15,7 @@ p {
   flex-wrap: wrap;
 }
 .text-right {
-    
+
   width: 70%;
   /* display: flex; */
   flex-wrap: wrap;
@@ -42,4 +42,11 @@ p {
 
 .rounded {
   border-radius: 0.25rem !important;
+}
+.message-text {
+  max-width: 80%; /* Limit the width of the message */
+  word-wrap: break-word; /* Break long words onto the next line */
+  overflow-wrap: break-word; /* Ensures long words or URLs break and wrap onto the next line */
+  white-space: pre-wrap; /* Preserve whitespace and wrap text */
+  border-radius: 10px;
 }

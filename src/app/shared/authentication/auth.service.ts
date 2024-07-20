@@ -26,6 +26,13 @@ export class AuthService {
       reqObj
     );
   }
+  VerifyEmail(reqObj:any):Observable<any>{
+    return this.http.post(`${this.contextRoute}api/v1/users/forgetPassword`,reqObj)
+  }
+  
+  updatePassword(reqObj:any):Observable<any>{
+    return this.http.post(`${this.contextRoute}api/v1/users/updatePassword`,reqObj)
+  }
 
  
   isAuthenticated(): boolean {

@@ -13,6 +13,8 @@ p {
     color: white;
   display: flex;
   flex-wrap: wrap;
+  /* margin-bottom: 1%; */
+
 }
 .text-right {
 
@@ -44,9 +46,22 @@ p {
   border-radius: 0.25rem !important;
 }
 .message-text {
-  max-width: 80%; /* Limit the width of the message */
-  word-wrap: break-word; /* Break long words onto the next line */
-  overflow-wrap: break-word; /* Ensures long words or URLs break and wrap onto the next line */
-  white-space: pre-wrap; /* Preserve whitespace and wrap text */
-  border-radius: 10px;
+  word-break: break-word; 
+  white-space: pre-wrap; 
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.justify-content-end .message-text {
+  text-align: right;
+  border-top-right-radius: 0;
+}
+
+.justify-content-start .message-text {
+  text-align: left;
+  border-top-left-radius: 0;
+}
+.msgBox{
+  width: 45%;
 }

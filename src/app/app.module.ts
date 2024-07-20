@@ -31,6 +31,7 @@ import { LogoutComponent } from './components/authentication/logout/logout.compo
 import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
 import { ChatComponent } from './components/communication/chat/chat.component';
 import { ChatListComponent } from './components/communication/chat-list/chat-list.component';
+import { ForgotPasswrodComponent } from './components/authentication/forgot-passwrod/forgot-passwrod.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { ChatListComponent } from './components/communication/chat-list/chat-lis
     ResetPasswordComponent,
     ChatComponent,
     ChatListComponent,
+    ForgotPasswrodComponent,
   ],
   imports: [
     BrowserModule,

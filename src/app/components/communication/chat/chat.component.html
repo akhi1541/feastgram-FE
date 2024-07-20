@@ -1,5 +1,8 @@
 <div class="container">
-  <div class="d-flex align-items-center justify-content-between p-2" style="background-color: #f8f9fa">
+  <div
+    class="d-flex align-items-center justify-content-between p-2"
+    style="background-color: #f8f9fa"
+  >
     <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
     <div class="flex-grow-1 text-center mb-3">
       <h1 class="pacifico-regular m-0">Feastgram</h1>
@@ -10,32 +13,47 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body p-0">
-          <div class="chat-box" #chatContainer style="height: 77vh; overflow-y: auto">
+          <div
+            class="chat-box"
+            #chatContainer
+            style="height: 77vh; overflow-y: auto"
+          >
             <div class="mb-5">
-              <h4 class="text-center p-1 position-fixed bg-white" style="z-index: 1; width: 90%;">{{receivername}}</h4>
+              <h4
+                class="text-center p-1 position-fixed bg-white"
+                style="z-index: 1; width: 94%"
+              >
+                {{ receivername }}
+              </h4>
             </div>
-            <div *ngFor="let msg of messages" class="d-flex align-items-start"
-                 [ngClass]="{ 'justify-content-end': msg.senderId.id === senderId, 'justify-content-start': msg.senderId.id !== senderId }">
-              <div class="d-flex align-items-start">
-                <img
-                  [src]="msg.senderId.profilePicture"
-                  [alt]="msg.senderId.name"
-                  class="rounded-circle me-2"
-                  style="width: 40px; height: 40px; object-fit: cover;"
-                />
-                <div>
-                  <h5 class="font-weight-bold mb-1">{{ msg.senderId.name }}</h5>
-                  <p
-                    class="message-text"
-                    [ngClass]="{
-                      'bg-primary text-white': msg.senderId.id === senderId,
-                      'bg-secondary text-white': msg.senderId.id !== senderId
-                    }"
-                  >
-                    {{ msg.message }}
-                  </p>
-                  <small class="text-muted">{{ msg.timeStamp | date:'short' }}</small>
-                </div>
+            <div
+              *ngFor="let msg of messages"
+              class="d-flex "
+              [ngClass]="{
+                'justify-content-end': msg.senderId.id === senderId,
+                'justify-content-start': msg.senderId.id !== senderId
+              }"
+            >
+              <div class="msgBox"
+                [ngClass]="{
+                  'ms-2 me-0 mb-2': msg.senderId.id !== senderId,
+                  'me-2 ms-0 mb-2 ': msg.senderId.id === senderId
+                }"
+              >
+                <p
+                  class="message-text ps-2 mb-1"
+                  [ngClass]="{
+                    'bg-primary text-white': msg.senderId.id === senderId,
+                    'bg-secondary text-white': msg.senderId.id !== senderId
+                  }"
+                  [style.marginRight]="msg.senderId.id === senderId ? '0' : ''"
+                  [style.marginLeft]="msg.senderId.id !== senderId ? '0' : ''"
+                >
+                  {{ msg.message }}
+                </p>
+                <small class="text-muted ms-1">{{
+                  msg.timeStamp | date : "short"
+                }}</small>
               </div>
             </div>
           </div>

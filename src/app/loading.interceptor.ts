@@ -9,17 +9,20 @@ import {
 import { Observable, tap } from 'rxjs';
 import { LoadingServiceService } from './shared/partials/loading-service.service';
 import { AuthService } from './shared/authentication/auth.service';
+import { PostServiceService } from './shared/posts/post-service.service';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
   private pendingRequests = 0;
 
-  constructor(private loadingService: LoadingServiceService , private authService: AuthService) {}
+  constructor(private loadingService: LoadingServiceService ,private postService:PostServiceService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.pendingRequests++;
     if(this.pendingRequests === 1){
-      this.loadingService.showLoading()
+      if(!this.postService.postLikedbool && !this.postService.postSavedBool){
+        this.loadingService.showLoading()
+      }
     }
 
     const currentUserToken = localStorage.getItem('token');

@@ -3,70 +3,89 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostServiceService {
-  contextRoute:string = 'http://localhost:3000/'
-  // contextRoute:string = 'http://192.168.145.186:3000/'
+  contextRoute: string = 'http://localhost:3000/';
 
-  constructor(private http:HttpClient) { }
+  // contextRoute:string = 'http://192.168.145.186:3000/'
+  postLikedbool: boolean = false;
+  postSavedBool: boolean = false;
+
+  constructor(private http: HttpClient) {}
 
   // getPosts():Observable<any>{
   //   return this.http.get(`${this.contextRoute}api/v1/posts/allposts`)
   // }
 
   getPosts(page: number): Observable<any> {
-    return this.http.get(`${this.contextRoute}api/v1/posts/allposts?page=${page}`);
+    return this.http.get(
+      `${this.contextRoute}api/v1/posts/allposts?page=${page}`
+    );
   }
 
-
-
-
-  updateLike(userId:string,recipeId:string):Observable<any>{
-    const reqObj={'recipeId':recipeId,'userId':userId}
-    const headers = new HttpHeaders({ 'Skip-Loading': 'true' });
-    return this.http.post(`${this.contextRoute}api/v1/posts/post/like`,reqObj, {headers})
+  updateLike(userId: string, recipeId: string): Observable<any> {
+    this.postLikedbool = true;
+    const reqObj = { recipeId: recipeId, userId: userId };
+    return this.http.post(`${this.contextRoute}api/v1/posts/post/like`, reqObj);
   }
-  updateSaved(userId:string,recipeId:string):Observable<any>{
-    const reqObj = {'userId':userId,'recipeId':recipeId}
-    const headers = new HttpHeaders({ 'Skip-Loading': 'true' });
-    return this.http.post(`${this.contextRoute}api/v1/posts/savedPost`,reqObj, {headers})
+  updateSaved(userId: string, recipeId: string): Observable<any> {
+    this.postSavedBool = true;
+    const reqObj = { userId: userId, recipeId: recipeId };
+    return this.http.post(`${this.contextRoute}api/v1/posts/savedPost`, reqObj);
   }
-  getUserSavedPosts(userId:string):Observable<any>{
-    return this.http.get(`${this.contextRoute}api/v1/posts/savedPosts/userSavedPosts/${userId}`)
+  getUserSavedPosts(userId: string): Observable<any> {
+    return this.http.get(
+      `${this.contextRoute}api/v1/posts/savedPosts/userSavedPosts/${userId}`
+    );
   }
-  getComments(recipeID:string):Observable<any>{
-    return this.http.get(`${this.contextRoute}api/v1/posts/post/getComments/${recipeID}`)
+  getComments(recipeID: string): Observable<any> {
+    return this.http.get(
+      `${this.contextRoute}api/v1/posts/post/getComments/${recipeID}`
+    );
   }
-  getLikedUsers(recipeID:string):Observable<any>{
-    return this.http.get(`${this.contextRoute}api/v1/posts/postlikes/${recipeID}`)
+  getLikedUsers(recipeID: string): Observable<any> {
+    return this.http.get(
+      `${this.contextRoute}api/v1/posts/postlikes/${recipeID}`
+    );
   }
-  postComment(newComment: any):Observable<any>{
-    return this.http.post(`${this.contextRoute}api/v1/posts/post/comment`, newComment)
-  }
-
-  createPost(postData: any): Observable<any>{
-    return this.http.post(`${this.contextRoute}api/v1/posts/post`, postData)
-  }
-
-  getUserSpecificPosts(userId: string):Observable<any>{
-    return this.http.get(`${this.contextRoute}api/v1/posts/userPosts/${userId}`)
+  postComment(newComment: any): Observable<any> {
+    return this.http.post(
+      `${this.contextRoute}api/v1/posts/post/comment`,
+      newComment
+    );
   }
 
-  userSpecificPost(postId: string):Observable<any>{
-    return this.http.get(`${this.contextRoute}api/v1/posts/post/${postId}`)
+  createPost(postData: any): Observable<any> {
+    return this.http.post(`${this.contextRoute}api/v1/posts/post`, postData);
   }
 
-  getProfileInfo(userId: string): Observable<any>{
-    return this.http.get(`${this.contextRoute}api/v1/users/getInfo/${userId}`)
+  getUserSpecificPosts(userId: string): Observable<any> {
+    return this.http.get(
+      `${this.contextRoute}api/v1/posts/userPosts/${userId}`
+    );
   }
 
-  updateProfileInfo(userId: string,formdata: FormData){
-    console.log(formdata)
-    return this.http.patch(`${this.contextRoute}api/v1/users/profile/${userId}`, formdata)
+  userSpecificPost(postId: string): Observable<any> {
+    return this.http.get(`${this.contextRoute}api/v1/posts/post/${postId}`);
+  }
+  deleteSpecificPost(postId: string): Observable<any> {
+    return this.http.delete(`${this.contextRoute}api/v1/posts/post/${postId}`);
   }
 
-  deletePost(id: string){
-    return this.http.delete(`${this.contextRoute}api/v1/posts/post/${id}`)
+  getProfileInfo(userId: string): Observable<any> {
+    return this.http.get(`${this.contextRoute}api/v1/users/getInfo/${userId}`);
+  }
+
+  updateProfileInfo(userId: string, formdata: FormData) {
+    console.log(formdata);
+    return this.http.patch(
+      `${this.contextRoute}api/v1/users/profile/${userId}`,
+      formdata
+    );
+  }
+
+  deletePost(id: string) {
+    return this.http.delete(`${this.contextRoute}api/v1/posts/post/${id}`);
   }
 }

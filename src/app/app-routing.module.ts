@@ -16,26 +16,52 @@ import { LogoutComponent } from './components/authentication/logout/logout.compo
 import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
 import { ChatComponent } from './components/communication/chat/chat.component';
 import { ChatListComponent } from './components/communication/chat-list/chat-list.component';
+import { ForgotPasswrodComponent } from './components/authentication/forgot-passwrod/forgot-passwrod.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'logout', component:LogoutComponent },
-  { path: 'resetPage/:token',component:ResetPasswordComponent },
+  { path: 'logout', component: LogoutComponent },
+  { path: 'forgotPassword', component: ForgotPasswrodComponent },
+  { path: 'resetPage/:token', component: ResetPasswordComponent },
+  { path: 'resetPage', component: ResetPasswordComponent,canActivate: [AuthGuard], },
   { path: 'home', component: PostsComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
-  { path: 'chat/:receiverId/:name', component: ChatComponent,canActivate: [AuthGuard] },
-  { path: 'chatlist', component: ChatListComponent,canActivate: [AuthGuard] },
+  {
+    path: 'chat/:receiverId/:name',
+    component: ChatComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'chatlist', component: ChatListComponent, canActivate: [AuthGuard] },
 
-  { path: 'comments/:id', component: CommentsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'comments/:id',
+    component: CommentsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'likes/:id', component: LikesComponent, canActivate: [AuthGuard] },
-  { path: 'createpost', component: CreatePostComponent, canActivate: [AuthGuard] },
-  { path: 'user/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
-  { path: 'post/:id', component: SinglePostComponent,canActivate: [AuthGuard] },
-  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: 'createpost',
+    component: CreatePostComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'user/:id',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'post/:id',
+    component: SinglePostComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-profile',
+    component: EditProfileComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
-  { path: '**', component: NotFoundComponent }
-
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

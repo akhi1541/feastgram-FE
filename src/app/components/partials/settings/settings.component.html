@@ -9,7 +9,7 @@
   <h2 class="my-4 text-center">Settings</h2>
   <div class="settings-content">
     <ul class="settings-list list-group mb-4">
-      <li class="setting-item list-group-item" routerLink="" >
+    <li class="setting-item list-group-item" [routerLink]="['/resetPage']" routerLinkActive="router-link-active">
         Change Password
       </li>
       <li class="setting-item list-group-item" (click)="toggleFeedbackForm()">

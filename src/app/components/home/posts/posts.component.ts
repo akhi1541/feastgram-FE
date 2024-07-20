@@ -7,40 +7,44 @@ import { PostServiceService } from 'src/app/shared/posts/post-service.service';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css'],
 })
-
 export class PostsComponent implements OnInit {
+  reportPost(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
+
   posts: any = [];
-  savedPosts:any = [];
+  savedPosts: any = [];
   liked: { [key: string]: boolean } = {};
   showDesc: { [key: string]: boolean } = {};
   saved: { [key: string]: boolean } = {};
   imageLoaded: { [key: string]: boolean } = {};
-  name: string =  ''
-  uid: string = ''
-  profilePic: string = ''
+  name: string = '';
+  uid: string = '';
+  profilePic: string = '';
   currentPage: number = 1;
   totalPages: number = 1;
   showContent: boolean = false;
 
   constructor() {}
   postService = inject(PostServiceService);
-  router = inject(Router)
+  router = inject(Router);
   ngOnInit(): void {
-    this.name = localStorage.getItem('name') || ''
-    this.uid = localStorage.getItem('uid') || ''
-    this.profilePic = localStorage.getItem('profilePicture') || ''
-      this.fetchPosts()
+    this.name = localStorage.getItem('name') || '';
+    this.uid = localStorage.getItem('uid') || '';
+    this.profilePic = localStorage.getItem('profilePicture') || '';
+    this.fetchPosts();
   }
-
-
 
   // ------------------------------
 
   fetchPosts(page: number = 1) {
     this.postService.getPosts(page).subscribe((res) => {
-      const newPosts = res.data.filter((post:any) => !this.posts.some((existingPost: any) => existingPost._id === post._id));
+      const newPosts = res.data.filter(
+        (post: any) =>
+          !this.posts.some((existingPost: any) => existingPost._id === post._id)
+      );
       this.posts = [...this.posts, ...newPosts];
-      this.totalPages = res.pages
+      this.totalPages = res.pages;
       console.log(newPosts);
       if (page === 1) {
         this.postService.getUserSavedPosts(this.uid).subscribe((res) => {
@@ -54,34 +58,39 @@ export class PostsComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
-    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    const pos =
+      (document.documentElement.scrollTop || document.body.scrollTop) +
+      document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
 
-    if(pos >= max - 1 && this.currentPage < this.totalPages) { // Ensure not to fetch beyond total pages
+    if (pos >= max - 1 && this.currentPage < this.totalPages) {
+      // Ensure not to fetch beyond total pages
       this.currentPage++;
       this.fetchPosts(this.currentPage);
     }
   }
   // ------------------------------
 
-  openComments(postId:string){
-    this.router.navigate(['/comments',postId])
+  openComments(postId: string) {
+    this.router.navigate(['/comments', postId]);
   }
-  toggleContent(postId:string) {
+  toggleContent(postId: string) {
     // this.showContent = !this.showContent;
     this.showDesc[postId] = !this.showContent;
   }
-  less(postId:string){
-    this.showDesc[postId] =false
+  less(postId: string) {
+    this.showDesc[postId] = false;
   }
 
-  openLikes(postId: string){
-    this.router.navigate(['/likes', postId])
+  openLikes(postId: string) {
+    this.router.navigate(['/likes', postId]);
   }
 
   initializeSavedStatus() {
-    this.posts.forEach((post:any) => {
-      this.saved[post._id] = this.savedPosts.some((savedPost:any) => savedPost.recipeId._id === post._id);
+    this.posts.forEach((post: any) => {
+      this.saved[post._id] = this.savedPosts.some(
+        (savedPost: any) => savedPost.recipeId._id === post._id
+      );
     });
   }
 
@@ -92,30 +101,34 @@ export class PostsComponent implements OnInit {
   }
 
   postLiked(postId: string): void {
-    const post = this.posts.find((p: any) => p._id === postId);
+    const post = this.posts.find((p: any) => p._id === postId); //getting the current post from all the posts
 
-      if (post) {
-        if (post.likedByIds.includes(this.uid)) {
-          post.likedByIds.pop();
-        } else {
-          post.likedByIds.push(this.uid);
-        }
-        post.likesCount = post.likedByIds.length;
+    if (post) {
+      if (post.likedByIds.includes(this.uid)) {
+        post.likedByIds.pop();
+      } else {
+        post.likedByIds.push(this.uid);
       }
+      post.likesCount = post.likedByIds.length;
+    }
     this.postService.updateLike(this.uid, postId).subscribe((res) => {
+      this.postService.postLikedbool = false;
       this.liked[postId] = res.status;
-
     });
   }
 
   postSaved(postId: string): void {
     this.postService.updateSaved(this.uid, postId).subscribe((res) => {
+      this.postService.postSavedBool = false;
       this.saved[postId] = res.statusBool;
       const post = this.posts.find((p: any) => p._id === postId);
 
       if (post) {
         const savedObj = { userId: this.uid, recipeId: postId };
-        const index = this.savedPosts.findIndex((savedPost:any) => savedPost.recipeId === postId && savedPost.userId === this.uid);
+        const index = this.savedPosts.findIndex(
+          (savedPost: any) =>
+            savedPost.recipeId === postId && savedPost.userId === this.uid
+        );
 
         if (index !== -1) {
           // Remove the saved object from the array
@@ -137,7 +150,20 @@ export class PostsComponent implements OnInit {
     return true; // Replace with actual condition
   }
 
-  openProfile(chefId: string){
-    this.router.navigate(['/user',chefId])
+  openProfile(chefId: string) {
+    this.router.navigate(['/user', chefId]);
+  }
+  deletePost(id: string) {
+    this.postService.deletePost(id).subscribe((res:any)=>{
+      // const index = this.posts.findIndex(
+      //   (post: any) =>
+      //     // res._id === post.recipeid && savedPost.userId === this.uid
+      // );
+
+      // if (index !== -1) {
+      //   // Remove the saved object from the array
+      //   this.savedPosts.splice(index, 1);
+      // }
+    });
   }
 }

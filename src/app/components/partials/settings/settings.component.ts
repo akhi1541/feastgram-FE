@@ -16,7 +16,7 @@ export class SettingsComponent implements OnInit {
 
   private location = inject(Location);
   private router = inject(Router);
-  private authService = inject(AuthService)
+  private authService = inject(AuthService);
   ngOnInit() {}
 
   toggleFeedbackForm() {
@@ -38,5 +38,4 @@ export class SettingsComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['login']);
   }
-
 }

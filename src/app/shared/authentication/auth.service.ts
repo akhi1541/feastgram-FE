@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private http = inject(HttpClient)
-  private router = inject(Router)
-  contextRoute:string = 'http://localhost:3000/'
-  constructor() { }
+  private http = inject(HttpClient);
+  private router = inject(Router);
+  contextRoute: string = 'http://localhost:3000/';
+  constructor() {}
 
   signup(reqObj: any): Observable<any> {
     return this.http.post(`${this.contextRoute}api/v1/users/signup`, reqObj);
@@ -26,15 +26,20 @@ export class AuthService {
       reqObj
     );
   }
-  VerifyEmail(reqObj:any):Observable<any>{
-    return this.http.post(`${this.contextRoute}api/v1/users/forgetPassword`,reqObj)
-  }
-  
-  updatePassword(reqObj:any):Observable<any>{
-    return this.http.post(`${this.contextRoute}api/v1/users/updatePassword`,reqObj)
+  VerifyEmail(reqObj: any): Observable<any> {
+    return this.http.post(
+      `${this.contextRoute}api/v1/users/forgetPassword`,
+      reqObj
+    );
   }
 
- 
+  updatePassword(reqObj: any): Observable<any> {
+    return this.http.post(
+      `${this.contextRoute}api/v1/users/updatePassword`,
+      reqObj
+    );
+  }
+
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     if (!token) {

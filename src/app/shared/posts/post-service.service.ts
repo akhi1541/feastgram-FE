@@ -24,12 +24,12 @@ export class PostServiceService {
     );
   }
 
-  updateLike(userId: string, recipeId: string): Observable<any> {
+  updateLike(userId: any, recipeId: string): Observable<any> {
     this.postLikedbool = true;
     const reqObj = { recipeId: recipeId, userId: userId };
     return this.http.post(`${this.contextRoute}api/v1/posts/post/like`, reqObj);
   }
-  updateSaved(userId: string, recipeId: string): Observable<any> {
+  updateSaved(userId: any, recipeId: string): Observable<any> {
     this.postSavedBool = true;
     const reqObj = { userId: userId, recipeId: recipeId };
     return this.http.post(`${this.contextRoute}api/v1/posts/savedPost`, reqObj);

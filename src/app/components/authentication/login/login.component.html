@@ -3,11 +3,11 @@
     <div class="col-12 col-sm-8 col-md-6 col-lg-4">
       <div class="card input-area p-4">
         <div class="text-center mb-3">
-          <h1 class="pacifico-regular">Feastgram</h1>
+          <h1 class="pacifico-regular" routerLink="/home">Feastgram</h1>
         </div>
         <div *ngIf="errMsg" class="alert alert-danger" role="alert">
-         <strong>An Error occured</strong>
-         <p>{{errMsg}}</p>
+          <strong>An Error occured</strong>
+          <p>{{ errMsg }}</p>
         </div>
         <form (ngSubmit)="onSubmit()">
           <div class="form-group mb-3">
@@ -46,7 +46,10 @@
         <button class="btn btn-link btn-block text-primary mb-2">
           <i class="fab fa-google"></i> Log in with Google
         </button>
-        <a [routerLink]="['/forgotPassword']" routerLinkActive="router-link-active" class="d-block text-center text-primary"
+        <a
+          [routerLink]="['/forgotPassword']"
+          routerLinkActive="router-link-active"
+          class="d-block text-center text-primary"
           >Forgot password?</a
         >
       </div>

@@ -5,7 +5,7 @@
   >
     <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
     <div class="flex-grow-1 text-center mb-3">
-      <h1 class="pacifico-regular m-0">Feastgram</h1>
+      <h1 class="pacifico-regular m-0" routerLink="/home">Feastgram</h1>
     </div>
     <div style="width: 24px"></div>
   </div>
@@ -28,13 +28,14 @@
             </div>
             <div
               *ngFor="let msg of messages"
-              class="d-flex "
+              class="d-flex"
               [ngClass]="{
                 'justify-content-end': msg.senderId.id === senderId,
                 'justify-content-start': msg.senderId.id !== senderId
               }"
             >
-              <div class="msgBox"
+              <div
+                class="msgBox"
                 [ngClass]="{
                   'ms-2 me-0 mb-2': msg.senderId.id !== senderId,
                   'me-2 ms-0 mb-2 ': msg.senderId.id === senderId

@@ -62,7 +62,7 @@ export class ChatListComponent implements OnInit {
   previousTexted(user: any){
     console.log(user);
 
-    this.router.navigate(['/chat',user.receiverId, user.name])
+    this.router.navigate(['/chat',user.userId, user.name])
   }
 
   goback() {

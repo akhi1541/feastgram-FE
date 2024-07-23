@@ -1,15 +1,21 @@
 <div class="settings-container container mt-4">
-  <div class="d-flex align-items-center justify-content-between p-2 bg-light border-bottom">
+  <div
+    class="d-flex align-items-center justify-content-between p-2 bg-light border-bottom"
+  >
     <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
     <div class="flex-grow-1 text-center">
-      <h1 class="pacifico-regular m-0">Feastgram</h1>
+      <h1 class="pacifico-regular m-0" routerLink="/home">Feastgram</h1>
     </div>
     <div style="width: 24px"></div>
   </div>
   <h2 class="my-4 text-center">Settings</h2>
   <div class="settings-content">
     <ul class="settings-list list-group mb-4">
-    <li class="setting-item list-group-item" [routerLink]="['/resetPage']" routerLinkActive="router-link-active">
+      <li
+        class="setting-item list-group-item"
+        [routerLink]="['/resetPage']"
+        routerLinkActive="router-link-active"
+      >
         Change Password
       </li>
       <li class="setting-item list-group-item" (click)="toggleFeedbackForm()">
@@ -23,11 +29,21 @@
       <h5 class="card-title">Feedback Form</h5>
       <div class="mb-3">
         <label for="feedbackEmail" class="form-label">Email:</label>
-        <input type="email" id="feedbackEmail" class="form-control" [(ngModel)]="feedbackEmail">
+        <input
+          type="email"
+          id="feedbackEmail"
+          class="form-control"
+          [(ngModel)]="feedbackEmail"
+        />
       </div>
       <div class="mb-3">
         <label for="feedbackText" class="form-label">Feedback:</label>
-        <textarea id="feedbackText" class="form-control" [(ngModel)]="feedbackText" rows="4"></textarea>
+        <textarea
+          id="feedbackText"
+          class="form-control"
+          [(ngModel)]="feedbackText"
+          rows="4"
+        ></textarea>
       </div>
       <button class="btn btn-primary">Submit</button>
     </div>

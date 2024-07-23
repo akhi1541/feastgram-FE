@@ -54,23 +54,23 @@ export class SinglePostComponent implements OnInit {
   }
 
   initializeSavedStatus(): void {
-    this.saved[this.post._id] = this.post.savedByUsers.some((savedPost: any) => savedPost._id === this.user._id);
+    this.saved[this.post._id] = this.post.savedByUsers.some((savedPost: any) => savedPost._id === localStorage.getItem('uid'));
   }
 
   initializeLikedStatus(): void {
-    this.liked[this.post._id] = this.post.likedBy.some((likedUser: any) => likedUser._id === this.user._id);
+    this.liked[this.post._id] = this.post.likedBy.some((likedUser: any) => likedUser._id === localStorage.getItem('uid'));
   }
 
 
   postLiked(postId: string): void {
-    this.postService.updateLike(this.user._id, postId).subscribe(
+    this.postService.updateLike(localStorage.getItem('uid'), postId).subscribe(
       (res: any) => {
         this.liked[postId] = res.status;
         if (res.status) {
-          this.post.likedBy.push(this.user._id);
+          this.post.likedBy.push(localStorage.getItem('uid'));
           this.post.likesCount++;
         } else {
-          this.post.likedBy = this.post.likedBy.filter((id: string) => id !== this.user._id);
+          this.post.likedBy = this.post.likedBy.filter((id: string) => id !== localStorage.getItem('uid'));
           this.post.likesCount--;
         }
       }
@@ -78,14 +78,14 @@ export class SinglePostComponent implements OnInit {
   }
 
   postSaved(postId: string): void {
-    this.postService.updateSaved(this.user._id, postId).subscribe(
+    this.postService.updateSaved(localStorage.getItem('uid'), postId).subscribe(
       (res: any) => {
         this.saved[postId] = res.statusBool;
 
         if (res.statusBool) {
-          this.post.savedByUsers.push({ userId: this.user._id});
+          this.post.savedByUsers.push({ userId: localStorage.getItem('uid')});
         } else {
-          this.post.savedByUsers = this.post.savedByUsers.filter((savedPost: any) => savedPost.userId !== this.user._id); // Remove savedBy object
+          this.post.savedByUsers = this.post.savedByUsers.filter((savedPost: any) => savedPost.userId !== localStorage.getItem('uid')); // Remove savedBy object
         }
       }
     );

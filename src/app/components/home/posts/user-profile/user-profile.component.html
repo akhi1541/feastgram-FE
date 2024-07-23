@@ -1,4 +1,4 @@
-<div *ngIf="isLoading" >
+<div *ngIf="isLoading">
   <app-loading-spinner></app-loading-spinner>
 </div>
 
@@ -9,7 +9,7 @@
   >
     <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
     <div class="flex-grow-1 text-center mb-3">
-      <h1 class="pacifico-regular m-0">Feastgram</h1>
+      <h1 class="pacifico-regular m-0" routerLink="/home">Feastgram</h1>
     </div>
     <div style="width: 24px"></div>
   </div>
@@ -28,10 +28,16 @@
         <span>100 following</span>
       </div>
       <p>
-        {{profile.bio === null || profile.bio === '' ? 'No bio yet' : profile.bio}}
+        {{
+          profile.bio === null || profile.bio === ""
+            ? "No bio yet"
+            : profile.bio
+        }}
       </p>
       <div class="d-flex justify-content-center align-items-center">
-        <button class="btn btn-primary" *ngIf="showEdit" routerLink="/settings" >Settings</button>
+        <button class="btn btn-primary" *ngIf="showEdit" routerLink="/settings">
+          Settings
+        </button>
         <button
           *ngIf="showEdit"
           class="btn btn-primary"
@@ -41,9 +47,12 @@
         </button>
         <button class="btn btn-primary">Follow</button>
       </div>
-      <div *ngIf="showEdit"  class="profile-info switch d-flex justify-content-space-between align-items-center" >
-        <i (click)="fetchUserPosts(uid)" class="fas fa-file-image  mx-4"></i>
-        <hr class="white" >
+      <div
+        *ngIf="showEdit"
+        class="profile-info switch d-flex justify-content-space-between align-items-center"
+      >
+        <i (click)="fetchUserPosts(uid)" class="fas fa-file-image mx-4"></i>
+        <hr class="white" />
         <i (click)="fetchSaved(uid)" class="fas fa-bookmark mx-2"></i>
       </div>
     </div>
@@ -64,12 +73,13 @@
               />
             </div>
             <div class="post-info">
-              <h3>{{ post.title }}</h3>  <p>{{ post.shortDescription }}</p>  </div>
+              <h3>{{ post.title }}</h3>
+              <p>{{ post.shortDescription }}</p>
+            </div>
           </a>
         </div>
       </div>
     </div>
-
 
     <div *ngIf="saved" class="posts-section">
       <div class="row">
@@ -86,5 +96,4 @@
       </div>
     </div>
   </div>
-
 </div>

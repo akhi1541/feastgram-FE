@@ -5,13 +5,16 @@
   >
     <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
     <div class="flex-grow-1 text-center mb-3">
-      <h1 class="pacifico-regular m-0">Feastgram</h1>
+      <h1 class="pacifico-regular m-0" routerLink="/home">Feastgram</h1>
     </div>
     <div style="width: 24px"></div>
   </div>
   <div class="comment-list">
     <div *ngFor="let comment of comments" class="comment my-3 border-bottom">
-      <div class="d-flex align-items-center" (click)="openProfile(comment.userId)">
+      <div
+        class="d-flex align-items-center"
+        (click)="openProfile(comment.userId)"
+      >
         <img
           src="{{ comment.profilePicture }}"
           class="rounded-circle me-3"

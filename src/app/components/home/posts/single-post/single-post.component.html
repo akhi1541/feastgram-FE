@@ -5,17 +5,20 @@
   >
     <i class="fa-solid fa-arrow-left custom-icon me-2" (click)="goback()"></i>
     <div class="flex-grow-1 text-center mb-3">
-      <h1 class="pacifico-regular m-0">Feastgram</h1>
+      <h1 class="pacifico-regular m-0" routerLink="/home">Feastgram</h1>
     </div>
     <div style="width: 24px"></div>
   </div>
-  <div class="row g-3" >
+  <div class="row g-3">
     <div class="col-md-4 g-4">
       <div class="card">
         <div class="d-flex align-items-center justify-content-between">
-          <div (click)="openProfile(post.chefId)" class="d-flex align-items-center user-info post-header">
+          <div
+            (click)="openProfile(post.chefId)"
+            class="d-flex align-items-center user-info post-header"
+          >
             <img
-              src="{{ post.image }}"
+              src="{{ post.profilePic }}"
               class="rounded-circle me-2"
               alt="Profile picture (smaller)"
               loading="lazy"
@@ -26,7 +29,10 @@
         </div>
         <div
           class="image-container"
-          [ngClass]="{ 'portrait': isPortrait(post.image), 'landscape': isLandscape(post.image) }"
+          [ngClass]="{
+            portrait: isPortrait(post.image),
+            landscape: isLandscape(post.image)
+          }"
         >
           <img
             src="{{ post.image }}"
@@ -35,100 +41,100 @@
           />
         </div>
         <div
-            class="post-actions d-flex justify-content-between align-items-center"
-          >
-            <div class="d-flex align-items-center">
-              <ng-container *ngIf="liked[post._id]; else notLiked">
-                <svg
-                  (click)="postLiked(post._id)"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </ng-container>
-              <ng-template #notLiked>
-                <svg
-                  (click)="postLiked(post._id)"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12.1 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12.1 21.35ZM16.5 4.5C14.76 4.5 13.09 5.32 12 6.84C10.91 5.32 9.24 4.5 7.5 4.5C5.5 4.5 4 6.01 4 8C4 11.28 7.4 14.36 12 18.55C16.6 14.36 20 11.28 20 8C20 6.01 18.5 4.5 16.5 4.5Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </ng-template>
-
-              <span class="count" (click)="openLikes(post._id)">
-                {{ post.likesCount }}
-              </span>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <i
-                class="fa fa-comment"
-                aria-hidden="true"
-                (click)="openComments(post._id)"
-              ></i>
-              <span class="count"> {{ post.commentsCount }}</span>
-            </div>
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            <div class="d-flex align-items-center">
-              <ng-container *ngIf="saved[post._id]; else notSaved">
-                <svg
-                  (click)="postSaved(post._id)"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
+          class="post-actions d-flex justify-content-between align-items-center"
+        >
+          <div class="d-flex align-items-center">
+            <ng-container *ngIf="liked[post._id]; else notLiked">
+              <svg
+                (click)="postLiked(post._id)"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
                   fill="currentColor"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-bookmark"
-                >
-                  <path
-                    d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
-                  ></path>
-                </svg>
-              </ng-container>
-              <ng-template #notSaved>
-                <svg
-                  (click)="postSaved(post._id)"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-bookmark"
-                >
-                  <path
-                    d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
-                  ></path>
-                </svg>
-              </ng-template>
-            </div>
+                />
+              </svg>
+            </ng-container>
+            <ng-template #notLiked>
+              <svg
+                (click)="postLiked(post._id)"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.1 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12.1 21.35ZM16.5 4.5C14.76 4.5 13.09 5.32 12 6.84C10.91 5.32 9.24 4.5 7.5 4.5C5.5 4.5 4 6.01 4 8C4 11.28 7.4 14.36 12 18.55C16.6 14.36 20 11.28 20 8C20 6.01 18.5 4.5 16.5 4.5Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </ng-template>
+
+            <span class="count" (click)="openLikes(post._id)">
+              {{ post.likesCount }}
+            </span>
           </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <i
+              class="fa fa-comment"
+              aria-hidden="true"
+              (click)="openComments(post._id)"
+            ></i>
+            <span class="count"> {{ post.commentsCount }}</span>
+          </div>
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          <div class="d-flex align-items-center">
+            <ng-container *ngIf="saved[post._id]; else notSaved">
+              <svg
+                (click)="postSaved(post._id)"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-bookmark"
+              >
+                <path
+                  d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                ></path>
+              </svg>
+            </ng-container>
+            <ng-template #notSaved>
+              <svg
+                (click)="postSaved(post._id)"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-bookmark"
+              >
+                <path
+                  d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                ></path>
+              </svg>
+            </ng-template>
+          </div>
+        </div>
 
         <div class="card-body">
-          <h6>
-            Description
-          </h6>
-          <p class="card-text">{{ post.description }}</p>
+          <h6>Title</h6>
+          <p class="card-text mb-1">{{ post.title }}</p>
+          <h6>Description</h6>
+          <p class="card-text mb-1">{{ post.description }}</p>
 
           <div class="time-ago">{{ post.createdAt | date : "short" }}</div>
           <h6 *ngIf="!showContent" (click)="toggleContent()">more..</h6>
@@ -136,19 +142,16 @@
             <div class="content">
               <div class="ingediantes">
                 <h6>Ingredients</h6>
-                <li *ngFor="let item of post.ingredients">{{item}}</li>
+                <li *ngFor="let item of post.ingredients">{{ item }}</li>
               </div>
-  
-              <div class="instructions">
+
+              <div class="instructions mt-2">
                 <h6>Instructions</h6>
-                <span>{{post.instructions}}</span>
+                <span>{{ post.instructions }}</span>
               </div>
             </div>
           </ng-container>
           <h6 *ngIf="showContent" (click)="toggleContent()">less..</h6>
-
-          
-          
         </div>
       </div>
     </div>

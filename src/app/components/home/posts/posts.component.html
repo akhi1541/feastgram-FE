@@ -11,8 +11,9 @@
         position: relative;
       "
     >
-      <h1 class="pacifico-regular m-0 mx-auto">Feastgram</h1>
-      <i routerLink="/chatlist"
+      <h1 class="pacifico-regular m-0 mx-auto" routerLink="/home">Feastgram</h1>
+      <i
+        routerLink="/chatlist"
         class="fas fa-comments fa-lg"
         style="position: absolute; right: 20px; cursor: pointer"
       ></i>
@@ -41,19 +42,23 @@
                 <div class="username">{{ post.name }}</div>
               </div>
               <i
-                  class="fa fa-ellipsis-v options"
-                  aria-hidden="true"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                ></i>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li *ngIf="uid===post.chefId">
-                    <a class="dropdown-item"  (click)="deletePost(post._id)">Delete</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item"  (click)="reportPost(post._id)">Report</a>
-                  </li>
-                </ul>
+                class="fa fa-ellipsis-v options"
+                aria-hidden="true"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              ></i>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li *ngIf="uid === post.chefId">
+                  <a class="dropdown-item" (click)="deletePost(post._id)"
+                    >Delete</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="reportPost(post._id)"
+                    >Report</a
+                  >
+                </li>
+              </ul>
             </div>
             <div class="image-container">
               <img
@@ -67,7 +72,10 @@
             </div>
 
             <div class="card-body">
-              <p class="card-text">{{ post.description }}</p>
+              <h6>Title</h6>
+              <p class="card-text mb-1">{{ post.title }}</p>
+              <h6>Description</h6>
+              <p class="card-text mb-1">{{ post.description }}</p>
 
               <div class="time-ago">{{ post.createdAt | date : "short" }}</div>
 
